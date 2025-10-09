@@ -108,7 +108,7 @@ const AppContent: React.FC = () => {
 
   return (
     <>
-      {isLoading && <Loader progress={loadingProgress} />}
+      {isLoading && <Loader />}
       <AppContainer
         style={{
           opacity: isLoading ? 0 : 1,

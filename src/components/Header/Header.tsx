@@ -58,14 +58,14 @@ export const Header: React.FC = () => {
               className={location.pathname === "/about" ? "active" : ""}
               $isScrolled={shouldBeScrolled}
             >
-              Om oss
+              About us
             </NavButton>
             <NavButton
               onClick={handleContactClick}
               $isScrolled={shouldBeScrolled}
               data-contact-button
             >
-              Kontakta oss
+              Contact us
             </NavButton>
           </Nav>
         </HeaderContent>

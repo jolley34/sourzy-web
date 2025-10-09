@@ -20,7 +20,7 @@ export const SideMenuContainer = styled.div<{ $isOpen: boolean }>`
   top: 0;
   right: 0;
   bottom: 0;
-
+  height: 100dvh;
   max-width: 40vw;
   background-color: ${theme.colors.background};
   box-shadow: ${theme.shadows.lg};

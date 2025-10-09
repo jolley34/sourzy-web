@@ -27,7 +27,7 @@ const AboutHero = styled.section`
 const AboutTitle = styled.h1`
   font-size: 3rem;
   font-weight: bold;
-  text-align: center;
+  text-align: left;
   margin-bottom: ${theme.spacing.lg};
   color: ${theme.colors.text};
 
@@ -39,10 +39,10 @@ const AboutTitle = styled.h1`
 
 const AboutSubtitle = styled.p`
   font-size: 1.25rem;
-  text-align: center;
+  text-align: left;
   color: ${theme.colors.textLight};
   max-width: 600px;
-  margin: 0 auto;
+
   line-height: 1.6;
 
   @media (max-width: ${theme.breakpoints.mobile}) {

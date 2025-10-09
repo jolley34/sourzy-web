@@ -66,7 +66,7 @@ export const HeroContent = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 ${theme.spacing.lg};
-  text-align: center;
+  text-align: left;
   position: relative;
   z-index: 1;
 
@@ -97,10 +97,10 @@ export const HeroSubtitle = styled.p`
   margin-bottom: ${theme.spacing.xl};
   opacity: 0.95;
   max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+
   line-height: 1.6;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  width: 90%;
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 1rem;
@@ -112,12 +112,13 @@ export const HeroSubtitle = styled.p`
 export const HeroCTA = styled.div`
   display: flex;
   gap: ${theme.spacing.md};
-  justify-content: center;
+  justify-content: left;
   margin-top: ${theme.spacing.xl};
+  align-items: left;
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     gap: ${theme.spacing.sm};
     margin-top: ${theme.spacing.lg};
   }
@@ -149,11 +150,11 @@ export const CTAButton = styled.button<{ $variant?: "primary" | "secondary" }>`
     }
   `
       : `
-    background: white;
-    color: ${theme.colors.primary};
+    background: #181818ff;
+    color: white;
 
     &:hover {
-      background: ${theme.colors.surface};
+      background: #191919ff;
       transform: translateY(-2px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
     }

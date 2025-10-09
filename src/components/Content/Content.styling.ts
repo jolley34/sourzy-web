@@ -91,7 +91,7 @@ export const ContentImageWrapper = styled.div`
   @media (max-width: ${theme.breakpoints.tablet}) {
     order: 1;
     margin: 0 auto;
-    max-height: 400px;
+    max-height: 250px;
   }
 
   &::before {

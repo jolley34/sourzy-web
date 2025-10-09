@@ -66,7 +66,7 @@ export const Content: React.FC = () => {
             kunder.
           </ContentDescription>
           <ContentButton onClick={handleLearnMore}>
-            Läs mer om oss
+            Read more about us
           </ContentButton>
         </ContentText>
         <ContentImageWrapper>
