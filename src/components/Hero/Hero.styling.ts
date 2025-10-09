@@ -119,6 +119,7 @@ export const HeroCTA = styled.div`
   @media (max-width: ${theme.breakpoints.mobile}) {
     align-items: left;
     justify-content: left;
+
     gap: ${theme.spacing.sm};
     margin-top: ${theme.spacing.lg};
   }
