@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { theme } from "../../styles/theme";
 
+// Header styles
 interface HeaderContainerProps {
   $isScrolled: boolean;
 }
@@ -48,6 +49,7 @@ export const Logo = styled.h1<LogoProps>`
 
   &:hover {
     color: ${theme.colors.primary};
+    transform: scale(1.05);
   }
 
   @media (max-width: ${theme.breakpoints.mobile}) {
@@ -74,27 +76,53 @@ export const NavButton = styled.button<NavButtonProps>`
   color: ${(props) => (props.$isScrolled ? "#ffffff" : "#ffffff")};
   font-size: 1rem;
   padding: ${theme.spacing.xs} ${theme.spacing.sm};
-  border-radius: 0.375rem;
-  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-weight: 500;
   text-shadow: ${(props) =>
     props.$isScrolled ? "none" : "0 2px 4px rgba(0, 0, 0, 0.3)"};
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: ${(props) =>
+      props.$isScrolled
+        ? "rgba(255, 255, 255, 0.15)"
+        : "rgba(255, 255, 255, 0.25)"};
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+  }
+
+  &:hover::before {
+    width: 300px;
+    height: 300px;
+  }
 
   &:hover {
-    background-color: ${(props) =>
-      props.$isScrolled
-        ? "rgba(255, 255, 255, 0.1)"
-        : "rgba(255, 255, 255, 0.2)"};
     color: ${theme.colors.primary};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
   &:active {
-    transform: translateY(1px);
+    transform: translateY(0);
   }
 
   &.active {
     background-color: ${theme.colors.primary};
     color: white;
+
+    &::before {
+      display: none;
+    }
   }
 
   @media (max-width: ${theme.breakpoints.mobile}) {

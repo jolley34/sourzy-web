@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { theme } from "../../styles/theme";
 
+// Hero styles
 interface HeroContainerProps {
   mediaType: "image" | "video";
   mediaSrc?: string;
@@ -66,12 +67,13 @@ export const HeroContent = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 ${theme.spacing.lg};
-  text-align: left;
+  text-align: center;
   position: relative;
   z-index: 1;
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     padding: 0 ${theme.spacing.md};
+    text-align: left;
   }
 `;
 
@@ -97,10 +99,8 @@ export const HeroSubtitle = styled.p`
   margin-bottom: ${theme.spacing.xl};
   opacity: 0.95;
   max-width: 700px;
-
   line-height: 1.6;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  width: 90%;
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 1rem;
@@ -112,13 +112,13 @@ export const HeroSubtitle = styled.p`
 export const HeroCTA = styled.div`
   display: flex;
   gap: ${theme.spacing.md};
-  justify-content: left;
+  justify-content: center;
   margin-top: ${theme.spacing.xl};
-  align-items: left;
+  align-items: center;
 
   @media (max-width: ${theme.breakpoints.mobile}) {
-    flex-direction: column;
     align-items: left;
+    justify-content: left;
     gap: ${theme.spacing.sm};
     margin-top: ${theme.spacing.lg};
   }
@@ -131,9 +131,31 @@ export const CTAButton = styled.button<{ $variant?: "primary" | "secondary" }>`
   font-weight: 600;
   border: 2px solid transparent;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
   display: inline-block;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  &:hover::before {
+    left: 100%;
+  }
 
   ${(props) =>
     props.$variant === "secondary"
@@ -145,23 +167,26 @@ export const CTAButton = styled.button<{ $variant?: "primary" | "secondary" }>`
     &:hover {
       background: white;
       color: ${theme.colors.primary};
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 30px rgba(255, 255, 255, 0.3);
+      border-color: white;
     }
   `
       : `
     background: #181818ff;
     color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 
     &:hover {
-      background: #191919ff;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      background: #252525ff;
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
     }
   `}
 
   &:active {
-    transform: translateY(0);
+    transform: translateY(-1px) scale(1);
+    transition: all 0.1s ease;
   }
 
   @media (max-width: ${theme.breakpoints.mobile}) {
