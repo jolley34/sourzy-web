@@ -4,6 +4,9 @@ import { Container, Section } from "../styles/GlobalStyles";
 import { theme } from "../styles/theme";
 
 const AboutHero = styled.section`
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   background: linear-gradient(
     135deg,
     ${theme.colors.surface} 0%,
@@ -21,6 +24,7 @@ const AboutHero = styled.section`
   @media (max-width: ${theme.breakpoints.mobile}) {
     padding-top: calc(60px + ${theme.spacing.xl});
     padding-bottom: ${theme.spacing.lg};
+    text-align: center;
   }
 `;
 
@@ -34,8 +38,8 @@ const AboutSubtitle = styled.p`
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 1rem;
-
     padding: 0 ${theme.spacing.sm};
+    text-align: center;
   }
 `;
 
@@ -85,6 +89,7 @@ const CardTitle = styled.h3`
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 1.25rem;
+    text-align: left;
   }
 `;
 
@@ -96,6 +101,7 @@ const CardDescription = styled.p`
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 0.95rem;
     line-height: 1.6;
+    text-align: left;
   }
 `;
 
@@ -118,6 +124,7 @@ const StatsGrid = styled.div`
   @media (max-width: ${theme.breakpoints.mobile}) {
     grid-template-columns: repeat(2, 1fr);
     gap: ${theme.spacing.lg};
+    text-align: center;
   }
 `;
 
@@ -136,6 +143,7 @@ const StatNumber = styled.div`
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 2.25rem;
+    text-align: center;
   }
 `;
 
@@ -145,6 +153,7 @@ const StatLabel = styled.div`
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 0.95rem;
+    text-align: center;
   }
 `;
 
@@ -167,6 +176,7 @@ const SectionTitle = styled.h2`
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 1.75rem;
     margin-bottom: ${theme.spacing.lg};
+    text-align: center;
   }
 `;
 
@@ -200,6 +210,7 @@ const TeamMember = styled.div`
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     padding: ${theme.spacing.lg};
+    text-align: left;
   }
 `;
 
@@ -226,6 +237,7 @@ const MemberName = styled.h4`
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 1.1rem;
+    text-align: left;
   }
 `;
 
@@ -237,6 +249,7 @@ const MemberRole = styled.p`
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 0.95rem;
+    text-align: left;
   }
 `;
 
@@ -247,6 +260,7 @@ const MemberBio = styled.p`
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 0.85rem;
+    text-align: left;
   }
 `;
 
@@ -262,6 +276,7 @@ const AboutSection = styled(Section)`
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     padding: ${theme.spacing.lg} ${theme.spacing.md};
+    align-items: flex-start;
   }
 `;
 
@@ -275,6 +290,7 @@ const AboutLabel = styled.p`
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 16px;
+    text-align: left;
   }
 `;
 
@@ -298,9 +314,9 @@ const AboutTitle = styled.h1`
 `;
 
 const AboutTitleSecondary = styled(AboutTitle)`
+  text-align: center;
   font-size: 80px;
   font-weight: 600;
-  text-align: center;
   margin-bottom: ${theme.spacing.sm};
   color: rgb(0, 0, 0);
   line-height: 1.1;
@@ -312,7 +328,6 @@ const AboutTitleSecondary = styled(AboutTitle)`
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 40px;
-    text-align: left;
   }
 `;
 
@@ -383,33 +398,6 @@ export const About: React.FC = () => {
         <AboutImage src="https://imagine-public.x.ai/imagine-public/images/42b0c467-7178-4bd4-8add-c534b6863526.png?cache=1"></AboutImage>
       </AboutImageContainer>
 
-      {/* <Grid
-        title="Learn about Sourzy."
-        subtitle="Partners in innovation and excellence."
-        images={[
-          {
-            src: "https://images.pexels.com/photos/12530465/pexels-photo-12530465.jpeg",
-            title: "Innovation",
-            description: "Where design meets function.",
-          },
-          {
-            src: "https://images.pexels.com/photos/34218652/pexels-photo-34218652.jpeg",
-            title: "Partnership",
-            description: "Working together for excellence.",
-          },
-          {
-            src: "https://images.pexels.com/photos/1427107/pexels-photo-1427107.jpeg",
-            title: "Quality",
-            description: "Built to last and inspire.",
-          },
-          {
-            src: "https://images.pexels.com/photos/19233057/pexels-photo-19233057.jpeg",
-            title: "Sustainability",
-            description: "Engine. Production. Future.",
-          },
-        ]}
-      />
- */}
       <AboutHero>
         <Container>
           <AboutTitleSecondary>Global partnership</AboutTitleSecondary>
@@ -492,69 +480,6 @@ export const About: React.FC = () => {
           </StatsGrid>
         </Container>
       </StatsSection>
-
-      {/*     <TeamSection>
-        <Container>
-          <SectionTitle>Vårt Team</SectionTitle>
-          <TeamGrid>
-            <TeamMember>
-              <MemberImage
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
-                alt="Karl Karlsson"
-              />
-              <MemberName>Karl Karlsson</MemberName>
-              <MemberRole>CEO</MemberRole>
-              <MemberBio>
-                Med över 15 års erfarenhet leder Karl företaget med vision och
-                passion. Han har en bakgrund inom teknologi och
-                affärsutveckling.
-              </MemberBio>
-            </TeamMember>
-
-            <TeamMember>
-              <MemberImage
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
-                alt="Karl Karlsson"
-              />
-              <MemberName>Karl Karlsson</MemberName>
-              <MemberRole>CEO</MemberRole>
-              <MemberBio>
-                Med över 15 års erfarenhet leder Karl företaget med vision och
-                passion. Han har en bakgrund inom teknologi och
-                affärsutveckling.
-              </MemberBio>
-            </TeamMember>
-
-            <TeamMember>
-              <MemberImage
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
-                alt="Karl Karlsson"
-              />
-              <MemberName>Karl Karlsson</MemberName>
-              <MemberRole>CEO</MemberRole>
-              <MemberBio>
-                Med över 15 års erfarenhet leder Karl företaget med vision och
-                passion. Han har en bakgrund inom teknologi och
-                affärsutveckling.
-              </MemberBio>
-            </TeamMember>
-
-            <TeamMember>
-              <MemberImage
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
-                alt="Karl Karlsson"
-              />
-              <MemberName>Karl Karlsson</MemberName>
-              <MemberRole>CEO</MemberRole>
-              <MemberBio>
-                Med över 15 års erfarenhet leder Karl företaget med vision och
-                passion. Han har en bakgrund inom teknologi och
-                affärsutveckling.
-              </MemberBio>
-            </TeamMember>
-          </TeamGrid>
-        </Container>
-      </TeamSection> */}
     </>
   );
 };
