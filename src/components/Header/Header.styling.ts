@@ -120,7 +120,7 @@ export const NavButton = styled.button<NavButtonProps>`
   }
 
   &:hover::after {
-    width: 100%;
+    width: 80%;
   }
 
   &:hover {
@@ -133,7 +133,7 @@ export const NavButton = styled.button<NavButtonProps>`
 
   &.active {
     &::after {
-      width: 100%;
+      width: 80%;
       background: white;
     }
   }

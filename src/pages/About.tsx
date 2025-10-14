@@ -34,6 +34,7 @@ const AboutSubtitle = styled.p`
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 1rem;
+
     padding: 0 ${theme.spacing.sm};
   }
 `;
