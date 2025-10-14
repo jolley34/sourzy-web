@@ -24,20 +24,6 @@ const AboutHero = styled.section`
   }
 `;
 
-const AboutTitle = styled.h1`
-  margin: 0 auto;
-  font-size: 3rem;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: ${theme.spacing.lg};
-  color: ${theme.colors.text};
-
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    font-size: 2rem;
-    margin-bottom: ${theme.spacing.md};
-  }
-`;
-
 const AboutSubtitle = styled.p`
   font-size: 1.25rem;
   text-align: center;
@@ -263,12 +249,169 @@ const MemberBio = styled.p`
   }
 `;
 
+const AboutSection = styled(Section)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: ${theme.spacing.xl} ${theme.spacing.lg};
+  background: black;
+  min-height: 100dvh;
+  width: 100dvw;
+
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    padding: ${theme.spacing.lg} ${theme.spacing.md};
+  }
+`;
+
+const AboutLabel = styled.p`
+  font-size: 24px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: ${theme.spacing.sm};
+  color: #ffe627;
+  letter-spacing: 0.5px;
+
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    font-size: 16px;
+  }
+`;
+
+const AboutTitle = styled.h1`
+  font-size: 80px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: ${theme.spacing.sm};
+  color: rgb(245, 245, 247);
+  line-height: 1.1;
+  max-width: 1200px;
+
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    font-size: 60px;
+  }
+
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    font-size: 40px;
+    text-align: left;
+  }
+`;
+
+const AboutTitleSecondary = styled(AboutTitle)`
+  font-size: 80px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: ${theme.spacing.sm};
+  color: rgb(0, 0, 0);
+  line-height: 1.1;
+  max-width: 1200px;
+
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    font-size: 60px;
+  }
+
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    font-size: 40px;
+    text-align: left;
+  }
+`;
+
+const AboutDescription = styled.p`
+  font-size: 21px;
+  font-weight: 400;
+  text-align: center;
+  color: #86868b;
+  line-height: 1.6;
+  max-width: 800px;
+  margin-top: ${theme.spacing.md};
+
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    font-size: 17px;
+    text-align: left;
+  }
+`;
+
+const AboutImageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: ${theme.spacing.xl} ${theme.spacing.lg};
+  padding-bottom: 10rem;
+  background-color: black;
+
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    padding: ${theme.spacing.sm} ${theme.spacing.sm};
+    padding-bottom: 10rem;
+  }
+`;
+
+const AboutImage = styled.img`
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: ${theme.spacing.lg};
+  max-height: 800px;
+  object-fit: cover;
+
+  box-shadow: ${theme.shadows.md};
+
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    max-width: 100%;
+    margin-top: ${theme.spacing.lg};
+  }
+`;
+
 export const About: React.FC = () => {
   return (
     <>
+      <AboutSection>
+        <AboutLabel>Sourzy</AboutLabel>
+        <AboutTitle>
+          Automation Framework. <br />
+          Engineered for Unmatched <br />
+          Performance.
+        </AboutTitle>
+        <AboutDescription>
+          Introducing the next generation of industrial automation systems,
+          designed from the ground up to deliver unparalleled efficiency and
+          reliability. At the heart of this innovation is a robust,
+          precision-engineered control framework that optimizes operational
+          performance.
+        </AboutDescription>
+      </AboutSection>
+
+      <AboutImageContainer>
+        <AboutImage src="https://imagine-public.x.ai/imagine-public/images/42b0c467-7178-4bd4-8add-c534b6863526.png?cache=1"></AboutImage>
+      </AboutImageContainer>
+
+      {/* <Grid
+        title="Learn about Sourzy."
+        subtitle="Partners in innovation and excellence."
+        images={[
+          {
+            src: "https://images.pexels.com/photos/12530465/pexels-photo-12530465.jpeg",
+            title: "Innovation",
+            description: "Where design meets function.",
+          },
+          {
+            src: "https://images.pexels.com/photos/34218652/pexels-photo-34218652.jpeg",
+            title: "Partnership",
+            description: "Working together for excellence.",
+          },
+          {
+            src: "https://images.pexels.com/photos/1427107/pexels-photo-1427107.jpeg",
+            title: "Quality",
+            description: "Built to last and inspire.",
+          },
+          {
+            src: "https://images.pexels.com/photos/19233057/pexels-photo-19233057.jpeg",
+            title: "Sustainability",
+            description: "Engine. Production. Future.",
+          },
+        ]}
+      />
+ */}
       <AboutHero>
         <Container>
-          <AboutTitle>Om Sourzy</AboutTitle>
+          <AboutTitleSecondary>Global partnership</AboutTitleSecondary>
           <AboutSubtitle>
             Vi är ett passionerat team av experter som arbetar för att leverera
             innovativa lösningar och exceptionell service till våra kunder.

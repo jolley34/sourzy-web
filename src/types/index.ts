@@ -24,6 +24,7 @@ export interface Theme {
     lg: string;
     xl: string;
     xxl: string;
+    xxxl: string;
   };
   shadows: {
     sm: string;

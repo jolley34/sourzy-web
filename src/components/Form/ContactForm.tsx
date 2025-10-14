@@ -178,44 +178,44 @@ export const ContactForm: React.FC<ContactFormProps> = ({
               <FormError>{errors.email}</FormError>
             )}
           </FormGroup>
+
+          <FormGroup>
+            <FormLabel htmlFor="subject">Ämne</FormLabel>
+            <FormInput
+              type="text"
+              id="subject"
+              name="subject"
+              value={formData.subject}
+              onChange={handleInputChange}
+              placeholder="Vad gäller ditt meddelande?"
+              disabled={isLoading}
+            />
+          </FormGroup>
+
+          <FormGroup>
+            <FormLabel htmlFor="message">
+              Meddelande <span className="required">*</span>
+            </FormLabel>
+            <FormTextarea
+              id="message"
+              name="message"
+              value={formData.message}
+              onChange={handleInputChange}
+              onBlur={handleBlur}
+              placeholder="Skriv ditt meddelande här..."
+              $hasError={!!errors.message && touched.message}
+              disabled={isLoading}
+            />
+            {errors.message && touched.message && (
+              <FormError>{errors.message}</FormError>
+            )}
+          </FormGroup>
+
+          <FormButton type="submit" $loading={isLoading} disabled={isLoading}>
+            {isLoading ? "Skickar..." : "Skicka meddelande"}
+            {isLoading && <LoadingSpinner />}
+          </FormButton>
         </FormGrid>
-
-        <FormGroup>
-          <FormLabel htmlFor="subject">Ämne</FormLabel>
-          <FormInput
-            type="text"
-            id="subject"
-            name="subject"
-            value={formData.subject}
-            onChange={handleInputChange}
-            placeholder="Vad gäller ditt meddelande?"
-            disabled={isLoading}
-          />
-        </FormGroup>
-
-        <FormGroup>
-          <FormLabel htmlFor="message">
-            Meddelande <span className="required">*</span>
-          </FormLabel>
-          <FormTextarea
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleInputChange}
-            onBlur={handleBlur}
-            placeholder="Skriv ditt meddelande här..."
-            $hasError={!!errors.message && touched.message}
-            disabled={isLoading}
-          />
-          {errors.message && touched.message && (
-            <FormError>{errors.message}</FormError>
-          )}
-        </FormGroup>
-
-        <FormButton type="submit" $loading={isLoading} disabled={isLoading}>
-          {isLoading ? "Skickar..." : "Skicka meddelande"}
-          {isLoading && <LoadingSpinner />}
-        </FormButton>
       </form>
     </FormContainer>
   );

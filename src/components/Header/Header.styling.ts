@@ -14,8 +14,7 @@ export const HeaderContainer = styled.header<HeaderContainerProps>`
   background-color: ${(props) =>
     props.$isScrolled ? "rgba(0, 0, 0, 0.95)" : "transparent"};
   backdrop-filter: ${(props) => (props.$isScrolled ? "blur(10px)" : "none")};
-  border-bottom: ${(props) =>
-    props.$isScrolled ? `1px solid rgba(255, 255, 255, 0.1)` : "none"};
+
   z-index: 1000;
   padding: ${theme.spacing.sm} 0;
   transition: all 0.3s ease;

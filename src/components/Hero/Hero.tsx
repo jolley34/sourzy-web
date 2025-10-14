@@ -58,12 +58,11 @@ export const Hero: React.FC = () => {
         <HeroVideo autoPlay loop muted playsInline src={media.mediaSrc} />
       )}
       <HeroContent>
-        <HeroTitle>Next level Sourcing</HeroTitle>
+        <HeroTitle>Your sourcing partner</HeroTitle>
         <HeroSubtitle>
-          Vi levererar innovativa lösningar som driver din verksamhet framåt.
-          Upptäck kraften i våra tjänster och se skillnaden vi kan göra för ditt
-          företag. Med passion för excellens och fokus på resultat hjälper vi
-          dig att nå dina mål.
+          At Sourzy, we are passionate about simplifying and strengthening trade
+          within industrial automation. We act as a partner, building bridges
+          between suppliers and companies across the globe.
         </HeroSubtitle>
         <HeroCTA>
           <CTAButton onClick={handleLearnMore}>Read More</CTAButton>

@@ -5,16 +5,35 @@ export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${theme.spacing.lg};
-  margin-top: ${theme.spacing.md};
+  width: 100%;
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    gap: ${theme.spacing.md};
+    margin-top: ${theme.spacing.md};
+  }
+
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    gap: ${theme.spacing.sm};
+    margin-top: ${theme.spacing.sm};
+  }
 `;
 
 export const FormGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: ${theme.spacing.lg};
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.sm};
+  width: 100%;
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: ${theme.spacing.md};
+  }
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     grid-template-columns: 1fr;
+    gap: ${theme.spacing.sm};
   }
 `;
 
@@ -22,6 +41,12 @@ export const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${theme.spacing.sm};
+  width: 100%;
+  box-sizing: border-box;
+
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    gap: ${theme.spacing.xs};
+  }
 `;
 
 export const FormLabel = styled.label`
@@ -35,6 +60,10 @@ export const FormLabel = styled.label`
     color: ${theme.colors.error};
     margin-left: 2px;
   }
+
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    font-size: 0.9rem;
+  }
 `;
 
 export const FormInput = styled.input<{ $hasError?: boolean }>`
@@ -47,6 +76,8 @@ export const FormInput = styled.input<{ $hasError?: boolean }>`
   outline: none;
   background: ${theme.colors.background};
   line-height: 1.5;
+  width: 100%;
+  box-sizing: border-box;
 
   &:focus {
     border-color: ${(props) =>
@@ -66,6 +97,11 @@ export const FormInput = styled.input<{ $hasError?: boolean }>`
     background-color: ${theme.colors.surface};
     cursor: not-allowed;
     opacity: 0.7;
+  }
+
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    padding: ${theme.spacing.sm} ${theme.spacing.md};
+    font-size: 1rem;
   }
 `;
 
@@ -82,6 +118,8 @@ export const FormTextarea = styled.textarea<{ $hasError?: boolean }>`
   resize: vertical;
   font-family: inherit;
   line-height: 1.6;
+  width: 100%;
+  box-sizing: border-box;
 
   &:focus {
     border-color: ${(props) =>
@@ -101,6 +139,12 @@ export const FormTextarea = styled.textarea<{ $hasError?: boolean }>`
     background-color: ${theme.colors.surface};
     cursor: not-allowed;
     opacity: 0.7;
+  }
+
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    padding: ${theme.spacing.sm} ${theme.spacing.md};
+    min-height: 120px;
+    font-size: 1rem;
   }
 `;
 
@@ -119,6 +163,8 @@ export const FormButton = styled.button<{ $loading?: boolean }>`
   min-width: 160px;
   opacity: ${(props) => (props.$loading ? 0.7 : 1)};
   margin-top: ${theme.spacing.sm};
+  width: 100%;
+  box-sizing: border-box;
 
   &:hover:not(:disabled) {
     background: ${theme.colors.primaryDark};
@@ -135,9 +181,14 @@ export const FormButton = styled.button<{ $loading?: boolean }>`
     opacity: 0.7;
   }
 
+  @media (max-width: 768px) {
+    margin-top: ${theme.spacing.md};
+  }
+
   @media (max-width: ${theme.breakpoints.mobile}) {
-    align-self: stretch;
-    text-align: center;
+    padding: ${theme.spacing.sm} ${theme.spacing.md};
+    min-width: auto;
+    margin-top: ${theme.spacing.md};
   }
 `;
 
@@ -147,6 +198,10 @@ export const FormError = styled.span`
   margin-top: -${theme.spacing.xs};
   display: block;
   font-weight: 500;
+
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    font-size: 0.8rem;
+  }
 `;
 
 export const FormSuccess = styled.div`
@@ -160,12 +215,20 @@ export const FormSuccess = styled.div`
   align-items: center;
   gap: ${theme.spacing.md};
   font-weight: 500;
+  width: 100%;
+  box-sizing: border-box;
 
   &:before {
     content: "✓";
     font-weight: bold;
     font-size: 1.3rem;
     flex-shrink: 0;
+  }
+
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    padding: ${theme.spacing.sm} ${theme.spacing.md};
+    gap: ${theme.spacing.sm};
+    font-size: 0.9rem;
   }
 `;
 
@@ -180,12 +243,20 @@ export const FormErrorAlert = styled.div`
   align-items: center;
   gap: ${theme.spacing.md};
   font-weight: 500;
+  width: 100%;
+  box-sizing: border-box;
 
   &:before {
     content: "⚠";
     font-weight: bold;
     font-size: 1.3rem;
     flex-shrink: 0;
+  }
+
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    padding: ${theme.spacing.sm} ${theme.spacing.md};
+    gap: ${theme.spacing.sm};
+    font-size: 0.9rem;
   }
 `;
 
@@ -205,5 +276,11 @@ export const LoadingSpinner = styled.div`
     to {
       transform: translateY(-50%) rotate(360deg);
     }
+  }
+
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    width: 18px;
+    height: 18px;
+    border-width: 1.5px;
   }
 `;

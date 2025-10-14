@@ -5,8 +5,6 @@ import {
   ContentButton,
   ContentContainer,
   ContentDescription,
-  ContentImage,
-  ContentImageWrapper,
   ContentSection,
   ContentText,
   ContentTitle,
@@ -55,21 +53,20 @@ export const Content: React.FC = () => {
         <ContentText>
           <ContentTitle>Our Story</ContentTitle>
           <ContentDescription>
-            Sourzy grundades med visionen att revolutionera branschen genom
-            innovativa lösningar och exceptionell kundservice. Vi har byggt vårt
-            rykte på pålitlighet, kvalitet och en djup förståelse för våra
-            kunders behov.
+            After many years in the automation industry, we saw endless
+            opportunities to make things more efficient. Working closely with
+            both factories and end customers, we realized there was a gap — and
+            an opportunity to build better connections.
           </ContentDescription>
           <ContentDescription>
-            Vårt team arbetar outtröttligt för att leverera resultat som
-            överstiger förväntningarna och driver verklig förändring för våra
-            kunder.
+            That’s why we founded Sourzy: to bridge that gap and bring a
+            smarter, more collaborative approach to automation.
           </ContentDescription>
           <ContentButton onClick={handleLearnMore}>
             Read more about us
           </ContentButton>
         </ContentText>
-        <ContentImageWrapper>
+        {/* <ContentImageWrapper>
           {media.mediaType === "image" ? (
             <ContentImage
               src={media.mediaSrc}
@@ -85,7 +82,7 @@ export const Content: React.FC = () => {
               style={{ width: "100%", borderRadius: "12px" }}
             />
           )}
-        </ContentImageWrapper>
+        </ContentImageWrapper> */}
       </ContentContainer>
     </ContentSection>
   );

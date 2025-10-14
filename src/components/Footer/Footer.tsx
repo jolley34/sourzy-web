@@ -175,16 +175,16 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
           </Copyright>
           <SocialLinks>
             <SocialLink href="#" aria-label="Facebook">
-              <FacebookLogo size={24} />
+              <FacebookLogo weight="bold" size={24} />
             </SocialLink>
             <SocialLink href="#" aria-label="Twitter">
-              <XLogo size={24} />
+              <XLogo weight="bold" size={24} />
             </SocialLink>
             <SocialLink href="#" aria-label="LinkedIn">
-              <LinkedinLogo size={24} />
+              <LinkedinLogo weight="bold" size={24} />
             </SocialLink>
             <SocialLink href="#" aria-label="Instagram">
-              <InstagramLogo size={24} />
+              <InstagramLogo weight="bold" size={24} />
             </SocialLink>
           </SocialLinks>
         </FooterBottom>

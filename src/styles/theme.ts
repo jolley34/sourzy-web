@@ -26,6 +26,7 @@ export const theme: Theme = {
     lg: "2rem",
     xl: "3rem",
     xxl: "4rem",
+    xxxl: "10rem",
   },
   shadows: {
     sm: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
