@@ -151,7 +151,11 @@ export const NavButton = styled.button<NavButtonProps>`
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 0.9rem;
-    padding: ${theme.spacing.xs};
+    padding: ${theme.spacing.sm} ${theme.spacing.md};
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     svg {
       display: none;
