@@ -163,7 +163,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
 
           <FormGroup>
             <FormLabel htmlFor="email">
-              Email<span className="required">*</span>
+              Email <span className="required">*</span>
             </FormLabel>
             <FormInput
               type="email"

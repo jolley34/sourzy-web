@@ -8,6 +8,7 @@ import {
   SideMenuDescription,
   SideMenuOverlay,
   SideMenuTitle,
+  SpaceBetween,
 } from "./SideMenu.styling";
 
 export const SideMenu: React.FC<SideMenuProps> = ({
@@ -32,16 +33,17 @@ export const SideMenu: React.FC<SideMenuProps> = ({
       <SideMenuOverlay $isOpen={isOpen} onClick={handleOverlayClick} />
       <SideMenuContainer $isOpen={isOpen}>
         <SideMenuContent>
-          <CloseButton onClick={handleClose} aria-label="Stäng meny">
-            ✕
-          </CloseButton>
-
+          <SpaceBetween>
+            <SideMenuTitle>Contact us</SideMenuTitle>
+            <CloseButton onClick={handleClose} aria-label="Close menu">
+              ✕
+            </CloseButton>
+          </SpaceBetween>
           {content === "contact" && (
-            <div>
-              <SideMenuTitle>Contact us</SideMenuTitle>
+            <div className="content-wrapper">
               <SideMenuDescription>
                 We are confident that we can find a tailored solution to meet
-                your needs. Feel free to send us your requests, questions or
+                your needs. Feel free to send us your requests, questions, or
                 part numbers.
               </SideMenuDescription>
               <ContactForm onSuccess={handleClose} autoClose={false} />

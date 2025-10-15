@@ -45,26 +45,30 @@ export const SideMenuContainer = styled.div<{ $isOpen: boolean }>`
 export const SideMenuContent = styled.div`
   padding: ${theme.spacing.xl};
   min-height: 100%;
-  position: relative;
   display: flex;
   flex-direction: column;
+  gap: ${theme.spacing.lg}; /* Consistent spacing between elements */
   width: 100%;
   box-sizing: border-box;
 
-  @media (max-width: 768px) {
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: ${theme.spacing.lg}; /* Spacing between description and form */
+  }
+
+  @media (max-width: ${theme.breakpoints.tablet}) {
     padding: ${theme.spacing.lg};
+    gap: ${theme.spacing.md};
   }
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     padding: ${theme.spacing.md};
-    padding-top: ${theme.spacing.xl};
+    gap: ${theme.spacing.sm};
   }
 `;
 
 export const CloseButton = styled.button`
-  position: absolute;
-  top: ${theme.spacing.lg};
-  right: ${theme.spacing.lg};
   background: none;
   border: none;
   font-size: 1.5rem;
@@ -73,8 +77,6 @@ export const CloseButton = styled.button`
   border-radius: 0.375rem;
   transition: all 0.2s ease;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -86,52 +88,53 @@ export const CloseButton = styled.button`
   }
 
   @media (max-width: ${theme.breakpoints.mobile}) {
-    top: ${theme.spacing.sm};
-    right: ${theme.spacing.sm};
-    width: 36px;
-    height: 36px;
+    font-size: 2rem;
+
+    padding: ${theme.spacing.xs};
   }
 `;
 
 export const SideMenuTitle = styled.h2`
   font-size: 2rem;
   font-weight: bold;
-  margin-bottom: ${theme.spacing.lg};
-  margin-top: ${theme.spacing.xl};
   color: ${theme.colors.text};
   word-wrap: break-word;
   overflow-wrap: break-word;
+  margin: 0; /* Remove default margins for consistency */
 
-  @media (max-width: 768px) {
+  @media (max-width: ${theme.breakpoints.tablet}) {
     font-size: 1.75rem;
-    margin-top: ${theme.spacing.lg};
-    margin-bottom: ${theme.spacing.md};
   }
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 1.5rem;
-    margin-top: ${theme.spacing.lg};
-    margin-bottom: ${theme.spacing.sm};
   }
+`;
+
+export const SpaceBetween = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: ${theme.spacing
+    .md}; /* Ensure consistent spacing between title and button */
 `;
 
 export const SideMenuDescription = styled.p`
   color: ${theme.colors.textLight};
-  margin-bottom: ${theme.spacing.xl};
   line-height: 1.7;
   font-size: 1.1rem;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  margin: 0; /* Remove default margins for consistency */
 
-  @media (max-width: 768px) {
+  @media (max-width: ${theme.breakpoints.tablet}) {
     font-size: 1rem;
-    margin-bottom: ${theme.spacing.lg};
     line-height: 1.6;
   }
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 0.95rem;
-    margin-bottom: ${theme.spacing.md};
     line-height: 1.5;
   }
 `;
