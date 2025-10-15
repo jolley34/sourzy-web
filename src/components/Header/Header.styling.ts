@@ -48,7 +48,19 @@ export const Logo = styled.h1<LogoProps>`
   position: relative;
   display: inline-block;
 
-  &::after {
+  &:hover::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    width: 100%;
+    height: 2px;
+    background: white;
+    transform: translateX(-50%);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &:not(:hover)::after {
     content: "";
     position: absolute;
     bottom: -3px;
@@ -58,10 +70,6 @@ export const Logo = styled.h1<LogoProps>`
     background: white;
     transform: translateX(-50%);
     transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  &:hover::after {
-    width: 100%;
   }
 
   &:hover {
