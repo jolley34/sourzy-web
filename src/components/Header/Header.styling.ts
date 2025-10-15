@@ -40,37 +40,13 @@ interface LogoProps {
 export const Logo = styled.h1<LogoProps>`
   font-size: 1.5rem;
   font-weight: bold;
-  color: ${(props) => (props.$isScrolled ? "#ffffff" : "#ffffff")};
+  color: #ffffff;
   cursor: pointer;
   transition: all 0.3s ease;
   text-shadow: ${(props) =>
     props.$isScrolled ? "none" : "0 2px 4px rgba(0, 0, 0, 0.3)"};
   position: relative;
   display: inline-block;
-
-  &:hover::after {
-    content: "";
-    position: absolute;
-    bottom: -3px;
-    left: 50%;
-    width: 100%;
-    height: 2px;
-    background: white;
-    transform: translateX(-50%);
-    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  &:not(:hover)::after {
-    content: "";
-    position: absolute;
-    bottom: -3px;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: white;
-    transform: translateX(-50%);
-    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
 
   &:hover {
     transform: translateY(-1px);
@@ -101,7 +77,7 @@ interface NavButtonProps {
 export const NavButton = styled.button<NavButtonProps>`
   background: none;
   border: none;
-  color: ${(props) => (props.$isScrolled ? "#ffffff" : "#ffffff")};
+  color: #ffffff;
   font-size: 1rem;
   padding: ${theme.spacing.xs} ${theme.spacing.sm};
   border-radius: 0.5rem;
@@ -194,12 +170,11 @@ export const HeroContainer = styled.section
   }))<HeroContainerProps>`
   position: relative;
   color: white;
-  padding: ${theme.spacing.xxl} 0;
-  min-height: 100vh;
+  width: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding-top: calc(80px + ${theme.spacing.xxl});
 
   &::before {
     content: "";
@@ -213,13 +188,11 @@ export const HeroContainer = styled.section
   }
 
   @media (max-width: ${theme.breakpoints.tablet}) {
-    min-height: 100vh;
-    padding-top: calc(70px + ${theme.spacing.xl});
+    height: 100vh;
   }
 
   @media (max-width: ${theme.breakpoints.mobile}) {
-    min-height: 100vh;
-    padding: calc(60px + ${theme.spacing.lg}) 0 ${theme.spacing.xl} 0;
+    height: 100vh;
   }
 `;
 

@@ -65,13 +65,29 @@ const AppContent: React.FC = () => {
   useEffect(() => {
     if (isSideMenuOpen) {
       document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+      document.documentElement.style.overflow = "hidden";
 
-    return () => {
-      document.body.style.overflow = "";
-    };
+      const sideMenu = document.querySelector(
+        "[data-sidemenu-container]"
+      ) as HTMLElement;
+      if (!sideMenu) return;
+
+      const handleWheel = (e: WheelEvent) => {
+        // Bare override scroll hvis sidemenu er scrollbar
+        if (sideMenu.scrollHeight > sideMenu.clientHeight) {
+          e.preventDefault();
+          sideMenu.scrollTop += e.deltaY;
+        }
+      };
+
+      sideMenu.addEventListener("wheel", handleWheel, { passive: false });
+
+      return () => {
+        sideMenu.removeEventListener("wheel", handleWheel);
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
+      };
+    }
   }, [isSideMenuOpen]);
 
   useEffect(() => {

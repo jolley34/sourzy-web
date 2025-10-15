@@ -13,6 +13,7 @@ export const SideMenuOverlay = styled.div<{ $isOpen: boolean }>`
   visibility: ${(props) => (props.$isOpen ? "visible" : "hidden")};
   transition: all 0.3s ease;
   cursor: pointer;
+  pointer-events: ${(props) => (props.$isOpen ? "auto" : "none")};
 `;
 
 export const SideMenuContainer = styled.div<{ $isOpen: boolean }>`
@@ -22,15 +23,16 @@ export const SideMenuContainer = styled.div<{ $isOpen: boolean }>`
   bottom: 0;
   height: 100dvh;
   width: 40vw;
-  max-width: 500px;
   background-color: ${theme.colors.background};
   box-shadow: ${theme.shadows.lg};
   z-index: 1002;
   transform: ${(props) =>
     props.$isOpen ? "translateX(0)" : "translateX(100%)"};
   transition: transform 0.3s ease;
-  overflow-y: auto;
+  overflow-y: scroll;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: auto;
 
   @media (max-width: ${theme.breakpoints.tablet}) {
     width: 75vw;
@@ -38,33 +40,80 @@ export const SideMenuContainer = styled.div<{ $isOpen: boolean }>`
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     width: 100vw;
-    max-width: 100vw;
   }
 `;
 
 export const SideMenuContent = styled.div`
-  padding: ${theme.spacing.xl};
-  min-height: 100%;
   display: flex;
   flex-direction: column;
-  gap: ${theme.spacing.lg}; /* Consistent spacing between elements */
+  min-height: 100%;
   width: 100%;
   box-sizing: border-box;
 
   .content-wrapper {
     display: flex;
     flex-direction: column;
-    gap: ${theme.spacing.lg}; /* Spacing between description and form */
+    gap: ${theme.spacing.lg};
+    flex: 1;
+    padding: ${theme.spacing.xl};
+    padding-top: ${theme.spacing.lg};
+
+    @media (max-width: ${theme.breakpoints.tablet}) {
+      padding: ${theme.spacing.lg};
+      padding-top: ${theme.spacing.md};
+      gap: ${theme.spacing.md};
+    }
+
+    @media (max-width: ${theme.breakpoints.mobile}) {
+      padding: ${theme.spacing.md};
+      padding-top: ${theme.spacing.sm};
+      gap: ${theme.spacing.sm};
+    }
   }
+`;
+
+export const SideMenuHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: ${theme.spacing.md};
+  position: sticky;
+  top: 0;
+  background-color: ${theme.colors.background};
+  z-index: 100;
+  padding: ${theme.spacing.xl};
+  padding-bottom: ${theme.spacing.md};
+  border-bottom: 1px solid ${theme.colors.border};
+  box-sizing: border-box;
 
   @media (max-width: ${theme.breakpoints.tablet}) {
     padding: ${theme.spacing.lg};
-    gap: ${theme.spacing.md};
+    padding-bottom: ${theme.spacing.md};
   }
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     padding: ${theme.spacing.md};
-    gap: ${theme.spacing.sm};
+    padding-bottom: ${theme.spacing.sm};
+  }
+`;
+
+export const SideMenuTitle = styled.h2`
+  font-size: 2rem;
+  font-weight: bold;
+  color: ${theme.colors.text};
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    font-size: 1.75rem;
+  }
+
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    font-size: 1.5rem;
   }
 `;
 
@@ -82,6 +131,8 @@ export const CloseButton = styled.button`
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  min-width: 40px;
+  min-height: 40px;
 
   &:hover {
     background-color: ${theme.colors.surface};
@@ -89,34 +140,10 @@ export const CloseButton = styled.button`
   }
 
   @media (max-width: ${theme.breakpoints.mobile}) {
-    padding: ${theme.spacing.xs};
+    min-width: 36px;
+    min-height: 36px;
+    font-size: 1.25rem;
   }
-`;
-
-export const SideMenuTitle = styled.h2`
-  font-size: 2rem;
-  font-weight: bold;
-  color: ${theme.colors.text};
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  margin: 0; /* Remove default margins for consistency */
-
-  @media (max-width: ${theme.breakpoints.tablet}) {
-    font-size: 1.75rem;
-  }
-
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    font-size: 1.5rem;
-  }
-`;
-
-export const SpaceBetween = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  gap: ${theme.spacing
-    .md}; /* Ensure consistent spacing between title and button */
 `;
 
 export const SideMenuDescription = styled.p`
@@ -125,7 +152,7 @@ export const SideMenuDescription = styled.p`
   font-size: 1.1rem;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  margin: 0; /* Remove default margins for consistency */
+  margin: 0;
 
   @media (max-width: ${theme.breakpoints.tablet}) {
     font-size: 1rem;
@@ -136,4 +163,13 @@ export const SideMenuDescription = styled.p`
     font-size: 0.95rem;
     line-height: 1.5;
   }
+`;
+
+// Deprecated - kept for backwards compatibility
+export const SpaceBetween = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: ${theme.spacing.md};
 `;

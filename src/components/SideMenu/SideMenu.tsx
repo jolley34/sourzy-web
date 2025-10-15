@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SideMenuProps } from "../../types";
 import { ContactForm } from "../Form/ContactForm";
 import {
@@ -6,9 +6,9 @@ import {
   SideMenuContainer,
   SideMenuContent,
   SideMenuDescription,
+  SideMenuHeader,
   SideMenuOverlay,
   SideMenuTitle,
-  SpaceBetween,
 } from "./SideMenu.styling";
 
 export const SideMenu: React.FC<SideMenuProps> = ({
@@ -28,17 +28,38 @@ export const SideMenu: React.FC<SideMenuProps> = ({
     }
   };
 
+  useEffect(() => {
+    if (isOpen) {
+      // Förhindra scroll på body och html när sidemenu är öppen
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+
+      // Förhindra touchmove på body
+      const preventScroll = (e: TouchEvent) => {
+        e.preventDefault();
+      };
+
+      document.addEventListener("touchmove", preventScroll, { passive: false });
+
+      return () => {
+        document.removeEventListener("touchmove", preventScroll);
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
+      };
+    }
+  }, [isOpen]);
+
   return (
     <>
       <SideMenuOverlay $isOpen={isOpen} onClick={handleOverlayClick} />
-      <SideMenuContainer $isOpen={isOpen}>
+      <SideMenuContainer $isOpen={isOpen} data-sidemenu-container>
         <SideMenuContent>
-          <SpaceBetween>
+          <SideMenuHeader>
             <SideMenuTitle>Contact us</SideMenuTitle>
             <CloseButton onClick={handleClose} aria-label="Close menu">
               ✕
             </CloseButton>
-          </SpaceBetween>
+          </SideMenuHeader>
           {content === "contact" && (
             <div className="content-wrapper">
               <SideMenuDescription>
