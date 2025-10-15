@@ -67,7 +67,7 @@ export const FormLabel = styled.label`
 `;
 
 export const FormInput = styled.input<{ $hasError?: boolean }>`
-  padding: ${theme.spacing.md} ${theme.spacing.md};
+  padding: ${theme.spacing.sm} ${theme.spacing.sm};
   border: 2px solid
     ${(props) => (props.$hasError ? theme.colors.error : theme.colors.border)};
   border-radius: 8px;
