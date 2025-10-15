@@ -473,13 +473,6 @@ export default function About() {
               </StatLabel>
             </StatCard>
             <StatCard>
-              <StatNumber>Shortage Mitigation</StatNumber>
-              <StatLabel>
-                Minimize the effects of supply shortages with comparable or
-                superior quality substitutes.
-              </StatLabel>
-            </StatCard>
-            <StatCard>
               <StatNumber>Global Supplier Networks</StatNumber>
               <StatLabel>
                 Leverage international partnerships to access high-quality
