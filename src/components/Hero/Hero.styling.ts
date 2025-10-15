@@ -25,7 +25,7 @@ export const HeroContainer = styled.section
   position: relative;
   color: white;
   padding: ${theme.spacing.xxl} 0;
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -43,12 +43,12 @@ export const HeroContainer = styled.section
   }
 
   @media (max-width: ${theme.breakpoints.tablet}) {
-    min-height: 100vh;
+    min-height: 100dvh;
     padding-top: calc(70px + ${theme.spacing.xl});
   }
 
   @media (max-width: ${theme.breakpoints.mobile}) {
-    min-height: 100vh;
+    min-height: 100dvh;
     padding: calc(60px + ${theme.spacing.lg}) 0 ${theme.spacing.xl} 0;
   }
 `;

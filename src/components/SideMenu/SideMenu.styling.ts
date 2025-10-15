@@ -21,6 +21,7 @@ export const SideMenuContainer = styled.div<{ $isOpen: boolean }>`
   top: 0;
   right: 0;
   bottom: 0;
+  height: 100vh;
   height: 100dvh;
   width: 40vw;
   background-color: ${theme.colors.background};
@@ -29,10 +30,9 @@ export const SideMenuContainer = styled.div<{ $isOpen: boolean }>`
   transform: ${(props) =>
     props.$isOpen ? "translateX(0)" : "translateX(100%)"};
   transition: transform 0.3s ease;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 
   @media (max-width: ${theme.breakpoints.tablet}) {
     width: 75vw;
@@ -46,15 +46,18 @@ export const SideMenuContainer = styled.div<{ $isOpen: boolean }>`
 export const SideMenuContent = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  flex: 1;
   width: 100%;
   box-sizing: border-box;
+  min-height: 0; /* Viktigt för flex-items med overflow */
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 
   .content-wrapper {
     display: flex;
     flex-direction: column;
     gap: ${theme.spacing.lg};
-    flex: 1;
     padding: ${theme.spacing.xl};
     padding-top: ${theme.spacing.lg};
 
@@ -86,6 +89,7 @@ export const SideMenuHeader = styled.div`
   padding-bottom: ${theme.spacing.md};
   border-bottom: 1px solid ${theme.colors.border};
   box-sizing: border-box;
+  flex-shrink: 0;
 
   @media (max-width: ${theme.breakpoints.tablet}) {
     padding: ${theme.spacing.lg};

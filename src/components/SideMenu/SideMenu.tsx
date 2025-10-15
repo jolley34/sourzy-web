@@ -34,7 +34,7 @@ export const SideMenu: React.FC<SideMenuProps> = ({
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
 
-      // Förhindra touchmove på body
+      // iOS Safari fix - förhindra touchmove på body
       const preventScroll = (e: TouchEvent) => {
         e.preventDefault();
       };
@@ -53,13 +53,13 @@ export const SideMenu: React.FC<SideMenuProps> = ({
     <>
       <SideMenuOverlay $isOpen={isOpen} onClick={handleOverlayClick} />
       <SideMenuContainer $isOpen={isOpen} data-sidemenu-container>
+        <SideMenuHeader>
+          <SideMenuTitle>Contact us</SideMenuTitle>
+          <CloseButton onClick={handleClose} aria-label="Close menu">
+            ✕
+          </CloseButton>
+        </SideMenuHeader>
         <SideMenuContent>
-          <SideMenuHeader>
-            <SideMenuTitle>Contact us</SideMenuTitle>
-            <CloseButton onClick={handleClose} aria-label="Close menu">
-              ✕
-            </CloseButton>
-          </SideMenuHeader>
           {content === "contact" && (
             <div className="content-wrapper">
               <SideMenuDescription>

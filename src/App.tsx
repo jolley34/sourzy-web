@@ -18,6 +18,7 @@ const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  min-height: 100dvh;
 `;
 
 const MainContent = styled.main`
@@ -73,7 +74,6 @@ const AppContent: React.FC = () => {
       if (!sideMenu) return;
 
       const handleWheel = (e: WheelEvent) => {
-        // Bare override scroll hvis sidemenu er scrollbar
         if (sideMenu.scrollHeight > sideMenu.clientHeight) {
           e.preventDefault();
           sideMenu.scrollTop += e.deltaY;
