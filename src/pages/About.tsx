@@ -238,7 +238,10 @@ const AboutSection = styled(Section)`
   align-items: center;
   padding: ${theme.spacing.xl} ${theme.spacing.lg};
   background: black;
-  min-height: 100vh;
+  height: 100dvh;
+  height: 100vh;
+  max-height: 100dvh;
+  max-height: 100vh;
   width: 100%;
 
   @media (max-width: ${theme.breakpoints.mobile}) {

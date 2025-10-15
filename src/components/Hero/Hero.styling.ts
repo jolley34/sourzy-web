@@ -26,7 +26,9 @@ export const HeroContainer = styled.section
   color: white;
   padding: ${theme.spacing.xxl} 0;
   height: 100dvh;
-  min-height: 100dvh;
+  height: 100vh;
+  max-height: 100dvh;
+  max-height: 100vh;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -44,12 +46,10 @@ export const HeroContainer = styled.section
   }
 
   @media (max-width: ${theme.breakpoints.tablet}) {
-    min-height: 100dvh;
     padding-top: calc(70px + ${theme.spacing.xl});
   }
 
   @media (max-width: ${theme.breakpoints.mobile}) {
-    min-height: 100dvh;
     padding: calc(60px + ${theme.spacing.lg}) 0 ${theme.spacing.xl} 0;
   }
 `;

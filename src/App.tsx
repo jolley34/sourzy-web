@@ -29,7 +29,12 @@ const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // Liten delay för att säkerställa DOM är uppdaterad
+    const timer = requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    });
+
+    return () => cancelAnimationFrame(timer);
   }, [pathname]);
 
   return null;
@@ -63,29 +68,25 @@ const AppContent: React.FC = () => {
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
+  // Stäng sidemenu när route ändras
+  useEffect(() => {
+    setIsSideMenuOpen(false);
+  }, [location.pathname]);
+
   useEffect(() => {
     if (isSideMenuOpen) {
+      // Spara scroll position innan vi fryser
+      const scrollY = window.scrollY;
+
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
 
-      const sideMenu = document.querySelector(
-        "[data-sidemenu-container]"
-      ) as HTMLElement;
-      if (!sideMenu) return;
-
-      const handleWheel = (e: WheelEvent) => {
-        if (sideMenu.scrollHeight > sideMenu.clientHeight) {
-          e.preventDefault();
-          sideMenu.scrollTop += e.deltaY;
-        }
-      };
-
-      sideMenu.addEventListener("wheel", handleWheel, { passive: false });
-
       return () => {
-        sideMenu.removeEventListener("wheel", handleWheel);
         document.body.style.overflow = "";
         document.documentElement.style.overflow = "";
+
+        // Återställ scroll position efter cleanup
+        window.scrollTo(0, scrollY);
       };
     }
   }, [isSideMenuOpen]);
@@ -141,6 +142,7 @@ const AppContent: React.FC = () => {
         style={{
           opacity: isLoading ? 0 : 1,
           transition: "opacity 0.5s ease-in-out",
+          pointerEvents: isLoading ? "none" : "auto",
         }}
       >
         <Header

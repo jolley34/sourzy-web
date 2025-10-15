@@ -141,7 +141,6 @@ export const CloseButton = styled.button`
   flex-shrink: 0;
   min-width: 40px;
   min-height: 40px;
-  -webkit-appearance: none;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 

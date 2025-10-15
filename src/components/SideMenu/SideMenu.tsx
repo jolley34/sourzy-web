@@ -33,12 +33,6 @@ export const SideMenu: React.FC<SideMenuProps> = ({
 
   useEffect(() => {
     if (isOpen) {
-      // Förhindra scroll på body och html när sidemenu är öppen
-      document.body.style.overflow = "hidden";
-      document.body.style.position = "fixed";
-      document.body.style.width = "100%";
-      document.documentElement.style.overflow = "hidden";
-
       // iOS Safari fix - förhindra touchmove på body men tillåt på sidemenu-innehållet
       const preventScroll = (e: TouchEvent) => {
         if (!contentRef.current?.contains(e.target as Node)) {
@@ -86,10 +80,6 @@ export const SideMenu: React.FC<SideMenuProps> = ({
           );
           contentRef.current.removeEventListener("touchmove", handleTouchMove);
         }
-        document.body.style.overflow = "";
-        document.body.style.position = "";
-        document.body.style.width = "";
-        document.documentElement.style.overflow = "";
       };
     }
   }, [isOpen]);
