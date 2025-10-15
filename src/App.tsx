@@ -25,17 +25,21 @@ const MainContent = styled.main`
   flex: 1;
 `;
 
-const ScrollToTop: React.FC = () => {
+const ScrollToTop: React.FC<{ isSideMenuOpen: boolean }> = ({
+  isSideMenuOpen,
+}) => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // Liten delay för att säkerställa DOM är uppdaterad
+    // Scrolla inte om sidemenu är öppen
+    if (isSideMenuOpen) return;
+
     const timer = requestAnimationFrame(() => {
       window.scrollTo({ top: 0, behavior: "auto" });
     });
 
     return () => cancelAnimationFrame(timer);
-  }, [pathname]);
+  }, [pathname, isSideMenuOpen]);
 
   return null;
 };
@@ -73,27 +77,20 @@ const AppContent: React.FC = () => {
     setIsSideMenuOpen(false);
   }, [location.pathname]);
 
+  // Hantera overflow när sidemenu öppnas/stängs
   useEffect(() => {
     if (isSideMenuOpen) {
-      // Förhindra scroll på hela dokumentet
-      const preventScroll = (e: Event) => {
-        if ((e as WheelEvent).preventDefault) {
-          e.preventDefault();
-        }
-      };
-
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
-      document.addEventListener("wheel", preventScroll, { passive: false });
-      document.addEventListener("touchmove", preventScroll, { passive: false });
-
-      return () => {
-        document.body.style.overflow = "";
-        document.documentElement.style.overflow = "";
-        document.removeEventListener("wheel", preventScroll);
-        document.removeEventListener("touchmove", preventScroll);
-      };
+    } else {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     }
+
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    };
   }, [isSideMenuOpen]);
 
   useEffect(() => {
@@ -155,7 +152,7 @@ const AppContent: React.FC = () => {
           setIsSideMenuOpen={setIsSideMenuOpen}
         />
         <MainContent>
-          <ScrollToTop />
+          <ScrollToTop isSideMenuOpen={isSideMenuOpen} />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
