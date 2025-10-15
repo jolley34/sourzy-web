@@ -5,8 +5,8 @@ export const SideMenuOverlay = styled.div<{ $isOpen: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1001;
   opacity: ${(props) => (props.$isOpen ? 1 : 0)};
@@ -20,10 +20,8 @@ export const SideMenuContainer = styled.div<{ $isOpen: boolean }>`
   position: fixed;
   top: 0;
   right: 0;
-  bottom: 0;
-  height: 100vh;
-  height: 100dvh;
   width: 40vw;
+  height: 100%;
   background-color: ${theme.colors.background};
   box-shadow: ${theme.shadows.lg};
   z-index: 1002;
@@ -33,8 +31,6 @@ export const SideMenuContainer = styled.div<{ $isOpen: boolean }>`
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  max-height: 100vh;
-  max-height: 100dvh;
 
   @media (max-width: ${theme.breakpoints.tablet}) {
     width: 75vw;
@@ -141,6 +137,7 @@ export const CloseButton = styled.button`
   flex-shrink: 0;
   min-width: 40px;
   min-height: 40px;
+  -webkit-appearance: none;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 

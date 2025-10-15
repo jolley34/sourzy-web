@@ -75,18 +75,23 @@ const AppContent: React.FC = () => {
 
   useEffect(() => {
     if (isSideMenuOpen) {
-      // Spara scroll position innan vi fryser
-      const scrollY = window.scrollY;
+      // Förhindra scroll på hela dokumentet
+      const preventScroll = (e: Event) => {
+        if ((e as WheelEvent).preventDefault) {
+          e.preventDefault();
+        }
+      };
 
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
+      document.addEventListener("wheel", preventScroll, { passive: false });
+      document.addEventListener("touchmove", preventScroll, { passive: false });
 
       return () => {
         document.body.style.overflow = "";
         document.documentElement.style.overflow = "";
-
-        // Återställ scroll position efter cleanup
-        window.scrollTo(0, scrollY);
+        document.removeEventListener("wheel", preventScroll);
+        document.removeEventListener("touchmove", preventScroll);
       };
     }
   }, [isSideMenuOpen]);
