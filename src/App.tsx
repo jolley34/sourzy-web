@@ -63,6 +63,18 @@ const AppContent: React.FC = () => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
   useEffect(() => {
+    if (isSideMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isSideMenuOpen]);
+
+  useEffect(() => {
     const loadPageResources = async () => {
       const resourcesToLoad: Array<{ src: string; type: "image" | "video" }> =
         [];
@@ -115,7 +127,10 @@ const AppContent: React.FC = () => {
           transition: "opacity 0.5s ease-in-out",
         }}
       >
-        <Header />
+        <Header
+          isSideMenuOpen={isSideMenuOpen}
+          setIsSideMenuOpen={setIsSideMenuOpen}
+        />
         <MainContent>
           <ScrollToTop />
           <Routes>

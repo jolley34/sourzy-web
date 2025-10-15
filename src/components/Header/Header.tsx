@@ -9,8 +9,15 @@ import {
   NavButton,
 } from "./Header.styling";
 
-export const Header: React.FC = () => {
-  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+interface HeaderProps {
+  isSideMenuOpen: boolean;
+  setIsSideMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const Header: React.FC<HeaderProps> = ({
+  isSideMenuOpen,
+  setIsSideMenuOpen,
+}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
