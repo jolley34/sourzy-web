@@ -1,9 +1,3 @@
-import {
-  FacebookLogo,
-  InstagramLogo,
-  LinkedinLogo,
-  XLogo,
-} from "@phosphor-icons/react";
 import React from "react";
 import styled from "styled-components";
 import { theme } from "../../styles/theme";
@@ -145,9 +139,8 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
           <FooterSection>
             <Logo>Sourzy</Logo>
             <FooterText>
-              We are passionate about simplifying and strengthening trade within
-              industrial automation. We act as a parter, building bridges
-              between suppliers and companies across the globe.
+              We are dedicated to streamlining and enhancing trade in industrial
+              automation.
             </FooterText>
           </FooterSection>
 
@@ -161,19 +154,15 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
 
           <FooterSection>
             <FooterTitle>Contact</FooterTitle>
-            <FooterText>
-              Email: info@sourzy.se
-              <br />
-              Phone: +46 70 123 45 67
-            </FooterText>
+            <FooterText>info@sourzy.com</FooterText>
           </FooterSection>
         </FooterGrid>
 
         <FooterBottom>
           <Copyright>
-            © {new Date().getFullYear()} Sourzy. Alla rättigheter förbehållna.
+            © {new Date().getFullYear()} Sourzy. All rights reserved.
           </Copyright>
-          <SocialLinks>
+          {/*  <SocialLinks>
             <SocialLink href="#" aria-label="Facebook">
               <FacebookLogo weight="bold" size={24} />
             </SocialLink>
@@ -186,7 +175,7 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
             <SocialLink href="#" aria-label="Instagram">
               <InstagramLogo weight="bold" size={24} />
             </SocialLink>
-          </SocialLinks>
+          </SocialLinks> */}
         </FooterBottom>
       </FooterContent>
     </FooterContainer>

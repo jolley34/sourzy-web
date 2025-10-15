@@ -38,11 +38,11 @@ export const SideMenu: React.FC<SideMenuProps> = ({
 
           {content === "contact" && (
             <div>
-              <SideMenuTitle>Kontakta oss</SideMenuTitle>
+              <SideMenuTitle>Contact us</SideMenuTitle>
               <SideMenuDescription>
-                Vi skulle älska att höra från dig! Fyll i formuläret nedan så
-                återkommer vi så snart som möjligt. Du kan också nå oss via
-                email eller telefon.
+                We are confident that we can find a tailored solution to meet
+                your needs. Feel free to send us your requests, questions or
+                part numbers.
               </SideMenuDescription>
               <ContactForm onSuccess={handleClose} autoClose={false} />
             </div>

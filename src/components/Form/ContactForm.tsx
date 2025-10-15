@@ -52,18 +52,19 @@ export const ContactForm: React.FC<ContactFormProps> = ({
   const validateField = (name: string, value: string): string | undefined => {
     switch (name) {
       case "name":
-        if (!value.trim()) return "Namn är obligatoriskt";
-        if (value.trim().length < 2) return "Namnet måste vara minst 2 tecken";
+        if (!value.trim()) return "Name is required";
+        if (value.trim().length < 2)
+          return "The name must be at least 2 characters.";
         break;
       case "email":
-        if (!value.trim()) return "E-post är obligatorisk";
+        if (!value.trim()) return "Email is required";
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(value)) return "Ange en giltig e-postadress";
+        if (!emailRegex.test(value)) return "Enter a valid email address.";
         break;
       case "message":
-        if (!value.trim()) return "Meddelande är obligatoriskt";
+        if (!value.trim()) return "Message is required";
         if (value.trim().length < 10)
-          return "Meddelandet måste vara minst 10 tecken";
+          return "The message must be at least 10 characters.";
         break;
       default:
         break;
@@ -131,7 +132,8 @@ export const ContactForm: React.FC<ContactFormProps> = ({
     <FormContainer>
       {success && (
         <FormSuccess>
-          Tack för ditt meddelande! Vi återkommer så snart som möjligt.
+          Thank you for your message! We will get back to you as soon as
+          possible.{" "}
         </FormSuccess>
       )}
 
@@ -141,7 +143,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
         <FormGrid>
           <FormGroup>
             <FormLabel htmlFor="name">
-              Namn <span className="required">*</span>
+              Name <span className="required">*</span>
             </FormLabel>
             <FormInput
               type="text"
@@ -150,7 +152,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
               value={formData.name}
               onChange={handleInputChange}
               onBlur={handleBlur}
-              placeholder="Ditt namn"
+              placeholder="Your name"
               $hasError={!!errors.name && touched.name}
               disabled={isLoading}
             />
@@ -161,7 +163,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
 
           <FormGroup>
             <FormLabel htmlFor="email">
-              E-post <span className="required">*</span>
+              Email<span className="required">*</span>
             </FormLabel>
             <FormInput
               type="email"
@@ -170,7 +172,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
               value={formData.email}
               onChange={handleInputChange}
               onBlur={handleBlur}
-              placeholder="din@email.se"
+              placeholder="your.mail@email.com"
               $hasError={!!errors.email && touched.email}
               disabled={isLoading}
             />
@@ -180,21 +182,21 @@ export const ContactForm: React.FC<ContactFormProps> = ({
           </FormGroup>
 
           <FormGroup>
-            <FormLabel htmlFor="subject">Ämne</FormLabel>
+            <FormLabel htmlFor="subject">Subject</FormLabel>
             <FormInput
               type="text"
               id="subject"
               name="subject"
               value={formData.subject}
               onChange={handleInputChange}
-              placeholder="Vad gäller ditt meddelande?"
+              placeholder="What is your subject regarding?"
               disabled={isLoading}
             />
           </FormGroup>
 
           <FormGroup>
             <FormLabel htmlFor="message">
-              Meddelande <span className="required">*</span>
+              Message <span className="required">*</span>
             </FormLabel>
             <FormTextarea
               id="message"
@@ -202,7 +204,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
               value={formData.message}
               onChange={handleInputChange}
               onBlur={handleBlur}
-              placeholder="Skriv ditt meddelande här..."
+              placeholder="Write your meessage here..."
               $hasError={!!errors.message && touched.message}
               disabled={isLoading}
             />
@@ -212,7 +214,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
           </FormGroup>
 
           <FormButton type="submit" $loading={isLoading} disabled={isLoading}>
-            {isLoading ? "Skickar..." : "Skicka meddelande"}
+            {isLoading ? "Sending..." : "Send message"}
             {isLoading && <LoadingSpinner />}
           </FormButton>
         </FormGrid>

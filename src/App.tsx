@@ -9,7 +9,7 @@ import styled from "styled-components";
 import { Footer } from "./components/Footer/Footer";
 import { Header } from "./components/Header/Header";
 import Loader from "./components/Loader/Loader";
-import { About } from "./pages/About";
+import About from "./pages/About";
 import { Home } from "./pages/Home";
 import { GlobalStyles } from "./styles/GlobalStyles";
 import { fetchMedia } from "./utils/fetchMedia";
