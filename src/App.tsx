@@ -29,17 +29,20 @@ const ScrollToTop: React.FC<{ isSideMenuOpen: boolean }> = ({
   isSideMenuOpen,
 }) => {
   const { pathname } = useLocation();
+  const prevPathnameRef = React.useRef(pathname);
 
   useEffect(() => {
-    // Scrolla inte om sidemenu är öppen
-    if (isSideMenuOpen) return;
+    // Scrolla bara om route faktiskt ändrades, inte bara för sidemenu stängning
+    if (pathname === prevPathnameRef.current) return;
+
+    prevPathnameRef.current = pathname;
 
     const timer = requestAnimationFrame(() => {
       window.scrollTo({ top: 0, behavior: "auto" });
     });
 
     return () => cancelAnimationFrame(timer);
-  }, [pathname, isSideMenuOpen]);
+  }, [pathname]);
 
   return null;
 };
@@ -86,11 +89,6 @@ const AppContent: React.FC = () => {
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
     }
-
-    return () => {
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
-    };
   }, [isSideMenuOpen]);
 
   useEffect(() => {

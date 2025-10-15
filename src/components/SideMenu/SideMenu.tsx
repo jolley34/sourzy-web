@@ -18,11 +18,20 @@ export const SideMenu: React.FC<SideMenuProps> = ({
 }) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const touchStartY = useRef(0);
+  const scrollYRef = useRef(0);
 
   const handleClose = () => {
+    // Spara scroll-position innan vi stänger
+    scrollYRef.current = window.scrollY;
+
     const event = new CustomEvent("closeContactSideMenu");
     window.dispatchEvent(event);
     onClose();
+
+    // Återställ scroll-position efter ett kort delay
+    requestAnimationFrame(() => {
+      window.scrollTo(0, scrollYRef.current);
+    });
   };
 
   const handleOverlayClick = (e: React.MouseEvent) => {
@@ -33,6 +42,9 @@ export const SideMenu: React.FC<SideMenuProps> = ({
 
   useEffect(() => {
     if (isOpen) {
+      // Spara scroll-position när menyn öppnas
+      scrollYRef.current = window.scrollY;
+
       // iOS Safari fix - förhindra touchmove på body men tillåt på sidemenu-innehållet
       const preventScroll = (e: TouchEvent) => {
         if (!contentRef.current?.contains(e.target as Node)) {
