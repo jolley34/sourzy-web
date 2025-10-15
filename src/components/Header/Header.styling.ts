@@ -49,22 +49,6 @@ export const Logo = styled.h1<LogoProps>`
   display: inline-block;
   margin: 0;
 
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: white;
-    transform: translateX(-50%);
-    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  &:hover::after {
-    width: 80%;
-  }
-
   &:hover {
     transform: translateY(-1px);
   }
@@ -107,6 +91,8 @@ export const NavButton = styled.button<NavButtonProps>`
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 
   &::after {
     content: "";
@@ -140,14 +126,7 @@ export const NavButton = styled.button<NavButtonProps>`
   }
 
   svg {
-    opacity: 0;
-    transform: translate(-4px, 4px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  &:hover svg {
-    opacity: 1;
-    transform: translate(0, 0);
+    display: none;
   }
 
   @media (max-width: ${theme.breakpoints.mobile}) {
@@ -157,10 +136,6 @@ export const NavButton = styled.button<NavButtonProps>`
     display: flex;
     align-items: center;
     justify-content: center;
-
-    svg {
-      display: none;
-    }
   }
 `;
 
@@ -296,6 +271,8 @@ export const CTAButton = styled.button<{ $variant?: "primary" | "secondary" }>`
   display: inline-block;
   position: relative;
   overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 
   &::before {
     content: "";

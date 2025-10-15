@@ -25,6 +25,7 @@ export const HeroContainer = styled.section
   position: relative;
   color: white;
   padding: ${theme.spacing.xxl} 0;
+  height: 100dvh;
   min-height: 100dvh;
   display: flex;
   align-items: center;

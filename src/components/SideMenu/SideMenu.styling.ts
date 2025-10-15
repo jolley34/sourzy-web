@@ -33,6 +33,8 @@ export const SideMenuContainer = styled.div<{ $isOpen: boolean }>`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  max-height: 100vh;
+  max-height: 100dvh;
 
   @media (max-width: ${theme.breakpoints.tablet}) {
     width: 75vw;
@@ -49,10 +51,12 @@ export const SideMenuContent = styled.div`
   flex: 1;
   width: 100%;
   box-sizing: border-box;
-  min-height: 0; /* Viktigt för flex-items med overflow */
+  min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
+  -webkit-user-select: text;
+  user-select: text;
 
   .content-wrapper {
     display: flex;
@@ -137,15 +141,22 @@ export const CloseButton = styled.button`
   flex-shrink: 0;
   min-width: 40px;
   min-height: 40px;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 
   &:hover {
     background-color: ${theme.colors.surface};
     color: ${theme.colors.text};
   }
 
+  &:active {
+    background-color: ${theme.colors.surface};
+  }
+
   @media (max-width: ${theme.breakpoints.mobile}) {
-    min-width: 36px;
-    min-height: 36px;
+    min-width: 44px;
+    min-height: 44px;
     font-size: 1.25rem;
   }
 `;
@@ -169,7 +180,6 @@ export const SideMenuDescription = styled.p`
   }
 `;
 
-// Deprecated - kept for backwards compatibility
 export const SpaceBetween = styled.div`
   display: flex;
   justify-content: space-between;
