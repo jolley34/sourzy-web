@@ -71,6 +71,7 @@ export const SideMenuContent = styled.div`
 export const CloseButton = styled.button`
   background: none;
   border: none;
+  font-weight: bold;
   font-size: 1.5rem;
   color: ${theme.colors.textLight};
   padding: ${theme.spacing.xs};
@@ -88,8 +89,6 @@ export const CloseButton = styled.button`
   }
 
   @media (max-width: ${theme.breakpoints.mobile}) {
-    font-size: 2rem;
-
     padding: ${theme.spacing.xs};
   }
 `;
