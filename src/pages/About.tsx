@@ -444,11 +444,10 @@ export default function About() {
             >
               <CardTitle>Our Story</CardTitle>
               <CardDescription>
-                Founded in 2013 with a vision to revolutionize component
-                sourcing, Sourzy has grown from a startup to an established
-                industry player. Over the years, we've built deep supplier
-                relationships, developed market expertise, and helped clients
-                worldwide optimize their supply chains.
+                Founded in 2025 with a vision to revolutionize component
+                sourcing, we are building strong supplier relationships,
+                developing market expertise, and helping clients worldwide
+                optimize their supply chains.
               </CardDescription>
             </ContentCard>
           </ContentGrid>
