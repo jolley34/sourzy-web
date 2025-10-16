@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import styled from "styled-components";
 import { Footer } from "./components/Footer/Footer";
 import { Header } from "./components/Header/Header";
@@ -46,6 +51,12 @@ const AppContent: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+  const location = useLocation();
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   useEffect(() => {
     const isIOS =
@@ -91,27 +102,22 @@ const AppContent: React.FC = () => {
       const resourcesToLoad: Array<{ src: string; type: "image" | "video" }> =
         [];
 
-      if (window.location.pathname === "/") {
-        setIsLoading(true);
+      if (location.pathname === "/") {
+        setIsLoading(true); // Ensure loader is shown
         setLoadingProgress(10);
-        const [heroMedia, contentMedia] = await Promise.all([
-          fetchMedia("hero"),
-          fetchMedia("content"),
-        ]);
-
-        setLoadingProgress(50);
-
-        resourcesToLoad.push(
-          { src: heroMedia.mediaSrc, type: heroMedia.mediaType },
-          { src: contentMedia.mediaSrc, type: contentMedia.mediaType }
-        );
-      } else if (window.location.pathname === "/about") {
-        setIsLoading(false);
-        return;
-      }
-
-      if (resourcesToLoad.length > 0) {
         try {
+          const [heroMedia, contentMedia] = await Promise.all([
+            fetchMedia("hero"),
+            fetchMedia("content"),
+          ]);
+
+          setLoadingProgress(50);
+
+          resourcesToLoad.push(
+            { src: heroMedia.mediaSrc, type: heroMedia.mediaType },
+            { src: contentMedia.mediaSrc, type: contentMedia.mediaType }
+          );
+
           await Promise.all(
             resourcesToLoad.map(({ src, type }) => preloadMedia(src, type))
           );
@@ -122,13 +128,16 @@ const AppContent: React.FC = () => {
           setLoadingProgress(100);
           await new Promise((resolve) => setTimeout(resolve, 500));
         }
+      } else {
+        setIsLoading(false); // No loader for other routes like /about
+        return;
       }
 
-      setIsLoading(false);
+      setIsLoading(false); // Hide loader after resources are loaded
     };
 
     loadPageResources();
-  }, []);
+  }, [location.pathname]); // Add location.pathname to trigger on route change
 
   return (
     <>
