@@ -8,6 +8,7 @@ import {
   SideMenuDescription,
   SideMenuHeader,
   SideMenuOverlay,
+  SideMenuSpacer,
   SideMenuTitle,
 } from "./SideMenu.styling";
 
@@ -117,6 +118,7 @@ export const SideMenu: React.FC<SideMenuProps> = ({
               <ContactForm onSuccess={handleClose} autoClose={false} />
             </div>
           )}
+          <SideMenuSpacer />
         </SideMenuContent>
       </SideMenuContainer>
     </>

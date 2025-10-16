@@ -37,11 +37,12 @@ const ScrollToTop: React.FC<{ isSideMenuOpen: boolean }> = ({
 
     prevPathnameRef.current = pathname;
 
-    const timer = requestAnimationFrame(() => {
+    // Använd setTimeout istället för requestAnimationFrame för bättre timing
+    const timer = setTimeout(() => {
       window.scrollTo({ top: 0, behavior: "auto" });
-    });
+    }, 0);
 
-    return () => cancelAnimationFrame(timer);
+    return () => clearTimeout(timer);
   }, [pathname]);
 
   return null;

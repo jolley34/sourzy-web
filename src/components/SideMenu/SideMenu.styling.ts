@@ -137,7 +137,6 @@ export const CloseButton = styled.button`
   flex-shrink: 0;
   min-width: 40px;
   min-height: 40px;
-  -webkit-appearance: none;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 
@@ -182,4 +181,17 @@ export const SpaceBetween = styled.div`
   align-items: center;
   width: 100%;
   gap: ${theme.spacing.md};
+`;
+
+/* iOS Safari search bar fix - white spacer at bottom */
+export const SideMenuSpacer = styled.div`
+  display: none;
+
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    display: block;
+    width: 100%;
+    height: max(${theme.spacing.lg}, env(safe-area-inset-bottom));
+    background-color: white;
+    flex-shrink: 0;
+  }
 `;
