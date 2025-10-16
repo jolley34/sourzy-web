@@ -80,6 +80,7 @@ const AppContent: React.FC = () => {
 
   useEffect(() => {
     if (isSideMenuOpen) {
+      document.body.style.background = "white";
       document.body.style.position = "fixed";
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
