@@ -16,10 +16,6 @@ export const HeaderContainer = styled.header<HeaderContainerProps>`
   z-index: 1000;
   padding: calc(${theme.spacing.sm}) ${theme.spacing.sm};
   transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
-
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    height: 48px;
-  }
 `;
 
 export const HeaderContent = styled.div`
