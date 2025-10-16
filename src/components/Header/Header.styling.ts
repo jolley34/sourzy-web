@@ -13,11 +13,6 @@ export const HeaderContainer = styled.header<HeaderContainerProps>`
   background-color: ${(props) =>
     props.$isScrolled ? "rgba(0, 0, 0, 0.95)" : "transparent"};
   backdrop-filter: ${(props) => (props.$isScrolled ? "blur(10px)" : "none")};
-  transform: translate3d(0, 0, 0);
-  -webkit-transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  will-change: transform;
   z-index: 1000;
   padding: calc(${theme.spacing.sm} + env(safe-area-inset-top, 0)) 0
     ${theme.spacing.sm};
@@ -48,21 +43,10 @@ export const Logo = styled.h1<LogoProps>`
   font-weight: bold;
   color: #ffffff;
   cursor: pointer;
-  transition: transform 0.3s ease, color 0.3s ease;
-  text-shadow: ${(props) =>
-    props.$isScrolled ? "none" : "0 2px 4px rgba(0, 0, 0, 0.3)"};
   margin: 0;
   line-height: 1;
-
-  @media (hover: hover) {
-    &:hover {
-      transform: translateY(-1px);
-    }
-
-    &:active {
-      transform: translateY(0);
-    }
-  }
+  display: flex;
+  align-items: center;
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 1.25rem;
@@ -91,10 +75,7 @@ export const NavButton = styled.button<NavButtonProps>`
   font-size: 1rem;
   padding: ${theme.spacing.xs} ${theme.spacing.sm};
   border-radius: 0.5rem;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
   font-weight: 500;
-  text-shadow: ${(props) =>
-    props.$isScrolled ? "none" : "0 2px 4px rgba(0, 0, 0, 0.3)"};
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -103,44 +84,13 @@ export const NavButton = styled.button<NavButtonProps>`
   touch-action: manipulation;
   height: 100%;
   position: relative;
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: white;
-    transform: translateX(-50%);
-    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  @media (hover: hover) {
-    &:hover::after {
-      width: 80%;
-    }
-
-    &:hover {
-      transform: translateY(-1px);
-    }
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-
-  &.active {
-    &::after {
-      width: 80%;
-      background: white;
-    }
-  }
+  min-width: 80px;
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 0.9rem;
     padding: ${theme.spacing.sm} ${theme.spacing.md};
     min-height: 44px;
+    min-width: 70px;
   }
 `;
 
