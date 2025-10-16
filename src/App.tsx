@@ -79,13 +79,23 @@ const AppContent: React.FC = () => {
   }, [location.pathname]);
 
   useEffect(() => {
+    const isMobile = window.innerWidth <= 768;
+
     if (isSideMenuOpen) {
-      document.body.style.background = "white";
-      document.body.style.position = "fixed";
-      document.body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden";
+      if (isMobile) {
+        // iOS Safari fix: only use fixed on mobile
+        document.body.style.position = "fixed";
+        document.body.style.width = "100%";
+        document.body.style.overflow = "hidden";
+      } else {
+        // Desktop: just hide overflow
+        document.body.style.overflow = "hidden";
+        document.documentElement.style.overflow = "hidden";
+      }
     } else {
+      // Reset all styles
       document.body.style.position = "";
+      document.body.style.width = "";
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
     }

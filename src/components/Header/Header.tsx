@@ -33,11 +33,20 @@ export const Header: React.FC<HeaderProps> = ({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Reset scroll when route changes
+  useEffect(() => {
+    // Använd setTimeout för att säkerställa att DOM är uppdaterad
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 0);
+  }, [location.pathname]);
+
   const handleLogoClick = () => {
     if (location.pathname !== "/") {
       navigate("/");
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleAboutClick = () => {
