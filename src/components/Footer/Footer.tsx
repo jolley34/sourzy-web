@@ -149,7 +149,8 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
             <FooterLink href="/about">About us</FooterLink>
             {/*  <FooterLink href="#" onClick={handleContactClick}>
               Contact
-            </FooterLink> */}
+            </FooterLink> */}{" "}
+            {/* THIS IS A BUG IF U CLICK THIS ON MOBILE YOU CANT SCROLL THE SIDEMENU (FIX LATER) */}
           </FooterSection>
 
           <FooterSection>
