@@ -35,7 +35,7 @@ export const ScrollToTop: React.FC = () => {
   useLayoutEffect(() => {
     if (pathname === prevPath.current) return;
     prevPath.current = pathname;
-    window.scrollTo({ top: 0, behavior: "instant" });
+    window.scrollTo({ top: 0, behavior: "auto" });
   }, [pathname]);
 
   return null;
