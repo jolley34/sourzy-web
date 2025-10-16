@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   Route,
   BrowserRouter as Router,
@@ -26,15 +26,18 @@ const MainContent = styled.main`
   flex: 1;
 `;
 
-// ✅ Ny säkrare ScrollToTop — löser dubbelklick/scroll-problem
-const ScrollToTop: React.FC = () => {
+// ScrollToTop.tsx
+
+export const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
-  useEffect(() => {
-    const handle = setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "auto" });
-    }, 100);
-    return () => clearTimeout(handle);
+  const prevPath = useRef(pathname);
+
+  useLayoutEffect(() => {
+    if (pathname === prevPath.current) return;
+    prevPath.current = pathname;
+    window.scrollTo({ top: 0, behavior: "instant" });
   }, [pathname]);
+
   return null;
 };
 
@@ -74,29 +77,23 @@ const AppContent: React.FC = () => {
 
   // ✅ Scroll-lock fix — förhindrar hopp, vit bakgrund & Safari-problem
   useEffect(() => {
-    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
     if (isSideMenuOpen) {
       if (isIOS) {
-        // iOS fix: position fixed istället för overflow hidden
         document.body.style.position = "fixed";
-        document.body.style.width = "100%";
+        document.body.style.top = `-${window.scrollY}px`;
       } else {
-        const scrollBarWidth =
-          window.innerWidth - document.documentElement.clientWidth;
         document.body.style.overflow = "hidden";
-        document.documentElement.style.overflow = "hidden";
-        document.body.style.paddingRight = `${scrollBarWidth}px`; // förhindrar header-hoppar
       }
-      document.body.style.backgroundColor = "white";
-      document.documentElement.style.overflow = "hidden";
     } else {
+      const scrollY = document.body.style.top;
       document.body.style.position = "";
-      document.body.style.width = "";
       document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
-      document.body.style.paddingRight = "";
-      document.body.style.backgroundColor = "";
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || "0") * -1);
+        document.body.style.top = "";
+      }
     }
   }, [isSideMenuOpen]);
 
