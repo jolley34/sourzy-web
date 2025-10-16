@@ -84,20 +84,17 @@ export const SideMenuHeader = styled.div`
   top: 0;
   background-color: ${theme.colors.background};
   z-index: 100;
-  padding: ${theme.spacing.xl};
-  padding-bottom: ${theme.spacing.md};
+  padding: ${theme.spacing.md} ${theme.spacing.xl};
   border-bottom: 1px solid ${theme.colors.border};
   box-sizing: border-box;
   flex-shrink: 0;
 
   @media (max-width: ${theme.breakpoints.tablet}) {
-    padding: ${theme.spacing.lg};
-    padding-bottom: ${theme.spacing.md};
+    padding: ${theme.spacing.sm} ${theme.spacing.lg};
   }
 
   @media (max-width: ${theme.breakpoints.mobile}) {
-    padding: ${theme.spacing.md};
-    padding-bottom: ${theme.spacing.sm};
+    padding: ${theme.spacing.xs} ${theme.spacing.md};
   }
 `;
 
