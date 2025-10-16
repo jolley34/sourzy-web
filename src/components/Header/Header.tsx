@@ -33,19 +33,14 @@ export const Header: React.FC<HeaderProps> = ({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "auto" });
-  }, [location.pathname]);
-
   const handleLogoClick = () => {
-    if (location.pathname !== "/") {
-      navigate("/");
-    }
+    navigate("/");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleAboutClick = () => {
     navigate("/about");
+    window.scrollTo({ top: 0, behavior: "auto" });
   };
 
   const handleContactClick = () => {

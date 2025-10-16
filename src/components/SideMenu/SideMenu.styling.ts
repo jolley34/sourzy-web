@@ -7,12 +7,11 @@ export const SideMenuOverlay = styled.div<{ $isOpen: boolean }>`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: 1001;
   opacity: ${(props) => (props.$isOpen ? 1 : 0)};
   visibility: ${(props) => (props.$isOpen ? "visible" : "hidden")};
-  transition: all 0.3s ease;
-  cursor: pointer;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
   pointer-events: ${(props) => (props.$isOpen ? "auto" : "none")};
 `;
 
@@ -140,9 +139,11 @@ export const CloseButton = styled.button`
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 
-  &:hover {
-    background-color: ${theme.colors.surface};
-    color: ${theme.colors.text};
+  @media (hover: hover) {
+    &:hover {
+      background-color: ${theme.colors.surface};
+      color: ${theme.colors.text};
+    }
   }
 
   &:active {
@@ -175,22 +176,13 @@ export const SideMenuDescription = styled.p`
   }
 `;
 
-export const SpaceBetween = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  gap: ${theme.spacing.md};
-`;
-
-/* iOS Safari search bar fix - white spacer at bottom */
 export const SideMenuSpacer = styled.div`
   display: none;
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     display: block;
     width: 100%;
-    height: max(${theme.spacing.lg}, env(safe-area-inset-bottom));
+    height: max(${theme.spacing.lg}, env(safe-area-inset-bottom, 0));
     background-color: white;
     flex-shrink: 0;
   }

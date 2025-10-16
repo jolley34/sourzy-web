@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { theme } from "../../styles/theme";
 
-// Header styles
 interface HeaderContainerProps {
   $isScrolled: boolean;
 }
@@ -14,14 +13,15 @@ export const HeaderContainer = styled.header<HeaderContainerProps>`
   background-color: ${(props) =>
     props.$isScrolled ? "rgba(0, 0, 0, 0.95)" : "transparent"};
   backdrop-filter: ${(props) => (props.$isScrolled ? "blur(10px)" : "none")};
-  transform: translateZ(0);
+  transform: translate3d(0, 0, 0);
   -webkit-transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-
+  will-change: transform;
   z-index: 1000;
-  padding: ${theme.spacing.sm} 0;
-  transition: all 0.3s ease;
+  padding: calc(${theme.spacing.sm} + env(safe-area-inset-top, 0)) 0
+    ${theme.spacing.sm};
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
 `;
 
 export const HeaderContent = styled.div`
@@ -31,9 +31,11 @@ export const HeaderContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 60px;
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     padding: 0 ${theme.spacing.sm};
+    height: 48px;
   }
 `;
 
@@ -46,12 +48,11 @@ export const Logo = styled.h1<LogoProps>`
   font-weight: bold;
   color: #ffffff;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, color 0.3s ease;
   text-shadow: ${(props) =>
     props.$isScrolled ? "none" : "0 2px 4px rgba(0, 0, 0, 0.3)"};
-  position: relative;
-  display: inline-block;
   margin: 0;
+  line-height: 1;
 
   @media (hover: hover) {
     &:hover {
@@ -71,6 +72,8 @@ export const Logo = styled.h1<LogoProps>`
 export const Nav = styled.nav`
   display: flex;
   gap: ${theme.spacing.xs};
+  align-items: center;
+  height: 100%;
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     gap: ${theme.spacing.xs};
@@ -88,17 +91,18 @@ export const NavButton = styled.button<NavButtonProps>`
   font-size: 1rem;
   padding: ${theme.spacing.xs} ${theme.spacing.sm};
   border-radius: 0.5rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
   font-weight: 500;
   text-shadow: ${(props) =>
     props.$isScrolled ? "none" : "0 2px 4px rgba(0, 0, 0, 0.3)"};
-  position: relative;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  justify-content: center;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
+  height: 100%;
+  position: relative;
 
   &::after {
     content: "";
@@ -133,89 +137,10 @@ export const NavButton = styled.button<NavButtonProps>`
     }
   }
 
-  svg {
-    display: none;
-  }
-
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 0.9rem;
     padding: ${theme.spacing.sm} ${theme.spacing.md};
     min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-`;
-
-// Hero styles
-interface HeroContainerProps {
-  mediaType: "image" | "video";
-  mediaSrc?: string;
-}
-
-export const HeroContainer = styled.section
-  .withConfig({
-    shouldForwardProp: (prop) => !["mediaType", "mediaSrc"].includes(prop),
-  })
-  .attrs<HeroContainerProps>(({ mediaType, mediaSrc }) => ({
-    style:
-      mediaType === "image"
-        ? {
-            backgroundImage: `url(${mediaSrc})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }
-        : {},
-  }))<HeroContainerProps>`
-  position: relative;
-  color: white;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
-    pointer-events: none;
-  }
-
-  @media (max-width: ${theme.breakpoints.tablet}) {
-    height: 100vh;
-  }
-
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    height: 100vh;
-  }
-`;
-
-export const HeroVideo = styled.video`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-`;
-
-export const HeroContent = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 ${theme.spacing.lg};
-  text-align: left;
-  position: relative;
-  z-index: 1;
-
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    padding: 0 ${theme.spacing.md};
   }
 `;
 

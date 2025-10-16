@@ -1,4 +1,9 @@
-import React, { useEffect, useState } from "react";
+// Extend Window interface to include MSStream
+interface Window {
+  MSStream?: unknown;
+}
+
+import React, { useEffect, useRef, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import styled from "styled-components";
 import { Footer } from "./components/Footer/Footer";
@@ -46,22 +51,22 @@ const AppContent: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+  const scrollYRef = useRef(0);
 
   useEffect(() => {
     const isIOS =
       /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     let scrollbarWidth = 0;
-    let scrollY = 0;
 
     if (isSideMenuOpen) {
-      scrollY = window.scrollY;
+      scrollYRef.current = window.scrollY;
       scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 
       document.documentElement.style.overflow = "hidden";
 
       if (isIOS) {
         document.body.style.position = "fixed";
-        document.body.style.top = `-${scrollY}px`;
+        document.body.style.top = `-${scrollYRef.current}px`;
         document.body.style.width = "100%";
         document.body.style.backgroundColor = "white";
       } else {
@@ -69,15 +74,20 @@ const AppContent: React.FC = () => {
         document.body.style.paddingRight = `${scrollbarWidth}px`;
       }
     } else {
-      scrollY = parseInt(document.body.style.top || "0", 10) * -1;
       document.documentElement.style.overflow = "";
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
-      document.body.style.backgroundColor = "";
-      window.scrollTo(0, scrollY);
+      if (isIOS) {
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.width = "";
+        document.body.style.backgroundColor = "";
+      } else {
+        document.body.style.overflow = "";
+        document.body.style.paddingRight = "";
+      }
+      window.scrollTo({
+        top: scrollYRef.current,
+        behavior: "auto",
+      });
     }
 
     return () => {
