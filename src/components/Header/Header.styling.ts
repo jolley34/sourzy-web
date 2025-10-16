@@ -14,9 +14,11 @@ export const HeaderContainer = styled.header<HeaderContainerProps>`
   background-color: ${(props) =>
     props.$isScrolled ? "rgba(0, 0, 0, 0.95)" : "transparent"};
   backdrop-filter: ${(props) => (props.$isScrolled ? "blur(10px)" : "none")};
-
   z-index: 1000;
   padding: ${theme.spacing.sm} 0;
+  padding-top: calc(
+    ${theme.spacing.sm} + env(safe-area-inset-top)
+  ); // Lägg till safe-area för iOS notch/address bar
   transition: all 0.3s ease;
 `;
 
@@ -49,8 +51,10 @@ export const Logo = styled.h1<LogoProps>`
   display: inline-block;
   margin: 0;
 
-  &:hover {
-    transform: translateY(-1px);
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-1px);
+    }
   }
 
   &:active {
@@ -106,12 +110,14 @@ export const NavButton = styled.button<NavButtonProps>`
     transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  &:hover::after {
-    width: 80%;
-  }
+  @media (hover: hover) {
+    &:hover::after {
+      width: 80%;
+    }
 
-  &:hover {
-    transform: translateY(-1px);
+    &:hover {
+      transform: translateY(-1px);
+    }
   }
 
   &:active {
@@ -139,7 +145,7 @@ export const NavButton = styled.button<NavButtonProps>`
   }
 `;
 
-// Hero styles
+// Hero styles (oförändrade, behålls som referens)
 interface HeroContainerProps {
   mediaType: "image" | "video";
   mediaSrc?: string;
@@ -163,7 +169,7 @@ export const HeroContainer = styled.section
   position: relative;
   color: white;
   width: 100%;
-  height: 100vh;
+  height: 100dvh; /* Ändrat till dvh för bättre viewport-hantering */
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -180,11 +186,11 @@ export const HeroContainer = styled.section
   }
 
   @media (max-width: ${theme.breakpoints.tablet}) {
-    height: 100vh;
+    height: 100dvh;
   }
 
   @media (max-width: ${theme.breakpoints.mobile}) {
-    height: 100vh;
+    height: 100dvh;
   }
 `;
 
@@ -290,8 +296,10 @@ export const CTAButton = styled.button<{ $variant?: "primary" | "secondary" }>`
     transition: left 0.5s ease;
   }
 
-  &:hover::before {
-    left: 100%;
+  @media (hover: hover) {
+    &:hover::before {
+      left: 100%;
+    }
   }
 
   ${(props) =>
@@ -301,12 +309,14 @@ export const CTAButton = styled.button<{ $variant?: "primary" | "secondary" }>`
     color: white;
     border-color: white;
 
-    &:hover {
-      background: white;
-      color: ${theme.colors.primary};
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 12px 30px rgba(255, 255, 255, 0.3);
-      border-color: white;
+    @media (hover: hover) {
+      &:hover {
+        background: white;
+        color: ${theme.colors.primary};
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 12px 30px rgba(255, 255, 255, 0.3);
+        border-color: white;
+      }
     }
   `
       : `
@@ -314,10 +324,12 @@ export const CTAButton = styled.button<{ $variant?: "primary" | "secondary" }>`
     color: white;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 
-    &:hover {
-      background: #252525ff;
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    @media (hover: hover) {
+      &:hover {
+        background: #252525ff;
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      }
     }
   `}
 

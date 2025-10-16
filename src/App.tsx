@@ -14,38 +14,31 @@ import { Home } from "./pages/Home";
 import { GlobalStyles } from "./styles/GlobalStyles";
 import { fetchMedia } from "./utils/fetchMedia";
 
+// ✅ Stabil layout även på iOS & Safari
 const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   min-height: 100dvh;
+  background-color: white;
 `;
 
 const MainContent = styled.main`
   flex: 1;
 `;
 
-const ScrollToTop: React.FC<{ isSideMenuOpen: boolean }> = ({
-  isSideMenuOpen,
-}) => {
+// ✅ Ny säkrare ScrollToTop — löser dubbelklick/scroll-problem
+const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
-  const prevPathnameRef = React.useRef(pathname);
-
   useEffect(() => {
-    if (pathname === prevPathnameRef.current) return;
-
-    prevPathnameRef.current = pathname;
-
-    const timer = setTimeout(() => {
+    const handle = setTimeout(() => {
       window.scrollTo({ top: 0, behavior: "auto" });
-    }, 0);
-
-    return () => clearTimeout(timer);
+    }, 100);
+    return () => clearTimeout(handle);
   }, [pathname]);
-
   return null;
 };
 
+// ✅ Media-preloader (oförändrad)
 const preloadMedia = (src: string, type: "image" | "video"): Promise<void> => {
   return new Promise((resolve, reject) => {
     if (!src) {
@@ -74,33 +67,40 @@ const AppContent: React.FC = () => {
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
+  // ✅ Stäng sidomeny vid navigation
   useEffect(() => {
     setIsSideMenuOpen(false);
   }, [location.pathname]);
 
+  // ✅ Scroll-lock fix — förhindrar hopp, vit bakgrund & Safari-problem
   useEffect(() => {
-    const isMobile = window.innerWidth <= 768;
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
     if (isSideMenuOpen) {
-      if (isMobile) {
-        // iOS Safari fix: only use fixed on mobile
+      if (isIOS) {
+        // iOS fix: position fixed istället för overflow hidden
         document.body.style.position = "fixed";
         document.body.style.width = "100%";
-        document.body.style.overflow = "hidden";
       } else {
-        // Desktop: just hide overflow
+        const scrollBarWidth =
+          window.innerWidth - document.documentElement.clientWidth;
         document.body.style.overflow = "hidden";
         document.documentElement.style.overflow = "hidden";
+        document.body.style.paddingRight = `${scrollBarWidth}px`; // förhindrar header-hoppar
       }
+      document.body.style.backgroundColor = "white";
+      document.documentElement.style.overflow = "hidden";
     } else {
-      // Reset all styles
       document.body.style.position = "";
       document.body.style.width = "";
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
+      document.body.style.paddingRight = "";
+      document.body.style.backgroundColor = "";
     }
   }, [isSideMenuOpen]);
 
+  // ✅ Media-preloading (oförändrad)
   useEffect(() => {
     const loadPageResources = async () => {
       const resourcesToLoad: Array<{ src: string; type: "image" | "video" }> =
@@ -161,7 +161,7 @@ const AppContent: React.FC = () => {
           setIsSideMenuOpen={setIsSideMenuOpen}
         />
         <MainContent>
-          <ScrollToTop isSideMenuOpen={isSideMenuOpen} />
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -174,6 +174,7 @@ const AppContent: React.FC = () => {
 };
 
 const App: React.FC = () => {
+  // ✅ Kontaktmeny-hantering (oförändrad)
   useEffect(() => {
     const handleOpenContactSideMenu = () => {
       const contactButton = document.querySelector(
