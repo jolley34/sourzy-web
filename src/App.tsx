@@ -1,10 +1,5 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import {
-  Route,
-  BrowserRouter as Router,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import styled from "styled-components";
 import { Footer } from "./components/Footer/Footer";
 import { Header } from "./components/Header/Header";
@@ -14,34 +9,17 @@ import { Home } from "./pages/Home";
 import { GlobalStyles } from "./styles/GlobalStyles";
 import { fetchMedia } from "./utils/fetchMedia";
 
-// ✅ Stabil layout även på iOS & Safari
 const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
   min-height: 100dvh;
-  background-color: white;
 `;
 
 const MainContent = styled.main`
   flex: 1;
 `;
 
-// ScrollToTop.tsx
-
-export const ScrollToTop: React.FC = () => {
-  const { pathname } = useLocation();
-  const prevPath = useRef(pathname);
-
-  useLayoutEffect(() => {
-    if (pathname === prevPath.current) return;
-    prevPath.current = pathname;
-    window.scrollTo({ top: 0, behavior: "auto" });
-  }, [pathname]);
-
-  return null;
-};
-
-// ✅ Media-preloader (oförändrad)
 const preloadMedia = (src: string, type: "image" | "video"): Promise<void> => {
   return new Promise((resolve, reject) => {
     if (!src) {
@@ -65,45 +43,60 @@ const preloadMedia = (src: string, type: "image" | "video"): Promise<void> => {
 };
 
 const AppContent: React.FC = () => {
-  const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
-  // ✅ Stäng sidomeny vid navigation
   useEffect(() => {
-    setIsSideMenuOpen(false);
-  }, [location.pathname]);
-
-  // ✅ Scroll-lock fix — förhindrar hopp, vit bakgrund & Safari-problem
-  useEffect(() => {
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isIOS =
+      /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    let scrollbarWidth = 0;
+    let scrollY = 0;
 
     if (isSideMenuOpen) {
+      scrollY = window.scrollY;
+      scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+      document.documentElement.style.overflow = "hidden";
+
       if (isIOS) {
         document.body.style.position = "fixed";
-        document.body.style.top = `-${window.scrollY}px`;
+        document.body.style.top = `-${scrollY}px`;
+        document.body.style.width = "100%";
+        document.body.style.backgroundColor = "white";
       } else {
         document.body.style.overflow = "hidden";
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
       }
     } else {
-      const scrollY = document.body.style.top;
+      scrollY = parseInt(document.body.style.top || "0", 10) * -1;
+      document.documentElement.style.overflow = "";
       document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
       document.body.style.overflow = "";
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || "0") * -1);
-        document.body.style.top = "";
-      }
+      document.body.style.paddingRight = "";
+      document.body.style.backgroundColor = "";
+      window.scrollTo(0, scrollY);
     }
+
+    return () => {
+      document.documentElement.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+      document.body.style.backgroundColor = "";
+    };
   }, [isSideMenuOpen]);
 
-  // ✅ Media-preloading (oförändrad)
   useEffect(() => {
     const loadPageResources = async () => {
       const resourcesToLoad: Array<{ src: string; type: "image" | "video" }> =
         [];
 
-      if (location.pathname === "/") {
+      if (window.location.pathname === "/") {
         setIsLoading(true);
         setLoadingProgress(10);
         const [heroMedia, contentMedia] = await Promise.all([
@@ -117,7 +110,7 @@ const AppContent: React.FC = () => {
           { src: heroMedia.mediaSrc, type: heroMedia.mediaType },
           { src: contentMedia.mediaSrc, type: contentMedia.mediaType }
         );
-      } else if (location.pathname === "/about") {
+      } else if (window.location.pathname === "/about") {
         setIsLoading(false);
         return;
       }
@@ -140,7 +133,7 @@ const AppContent: React.FC = () => {
     };
 
     loadPageResources();
-  }, [location.pathname]);
+  }, []);
 
   return (
     <>
@@ -158,7 +151,6 @@ const AppContent: React.FC = () => {
           setIsSideMenuOpen={setIsSideMenuOpen}
         />
         <MainContent>
-          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -171,7 +163,6 @@ const AppContent: React.FC = () => {
 };
 
 const App: React.FC = () => {
-  // ✅ Kontaktmeny-hantering (oförändrad)
   useEffect(() => {
     const handleOpenContactSideMenu = () => {
       const contactButton = document.querySelector(

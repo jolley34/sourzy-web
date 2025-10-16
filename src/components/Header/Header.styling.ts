@@ -14,11 +14,13 @@ export const HeaderContainer = styled.header<HeaderContainerProps>`
   background-color: ${(props) =>
     props.$isScrolled ? "rgba(0, 0, 0, 0.95)" : "transparent"};
   backdrop-filter: ${(props) => (props.$isScrolled ? "blur(10px)" : "none")};
+  transform: translateZ(0);
+  -webkit-transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
   z-index: 1000;
   padding: ${theme.spacing.sm} 0;
-  padding-top: calc(
-    ${theme.spacing.sm} + env(safe-area-inset-top)
-  ); // Lägg till safe-area för iOS notch/address bar
   transition: all 0.3s ease;
 `;
 
@@ -55,10 +57,10 @@ export const Logo = styled.h1<LogoProps>`
     &:hover {
       transform: translateY(-1px);
     }
-  }
 
-  &:active {
-    transform: translateY(0);
+    &:active {
+      transform: translateY(0);
+    }
   }
 
   @media (max-width: ${theme.breakpoints.mobile}) {
@@ -145,7 +147,7 @@ export const NavButton = styled.button<NavButtonProps>`
   }
 `;
 
-// Hero styles (oförändrade, behålls som referens)
+// Hero styles
 interface HeroContainerProps {
   mediaType: "image" | "video";
   mediaSrc?: string;
@@ -169,7 +171,7 @@ export const HeroContainer = styled.section
   position: relative;
   color: white;
   width: 100%;
-  height: 100dvh; /* Ändrat till dvh för bättre viewport-hantering */
+  height: 100vh;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -186,11 +188,11 @@ export const HeroContainer = styled.section
   }
 
   @media (max-width: ${theme.breakpoints.tablet}) {
-    height: 100dvh;
+    height: 100vh;
   }
 
   @media (max-width: ${theme.breakpoints.mobile}) {
-    height: 100dvh;
+    height: 100vh;
   }
 `;
 

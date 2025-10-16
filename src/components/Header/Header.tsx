@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom"; // Lägg till NavLink
-import { theme } from "../../styles/theme";
+import { useLocation, useNavigate } from "react-router-dom";
 import { SideMenu } from "../SideMenu/SideMenu";
 import {
   HeaderContainer,
@@ -34,17 +33,19 @@ export const Header: React.FC<HeaderProps> = ({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Scroll to top on route change (behåll din logik, men förenklad)
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "auto" }); // Använd 'auto' för att undvika smooth-interferens
+    window.scrollTo({ top: 0, behavior: "auto" });
   }, [location.pathname]);
 
   const handleLogoClick = () => {
     if (location.pathname !== "/") {
       navigate("/");
-    } else {
-      window.scrollTo({ top: 0, behavior: "auto" }); // Ändrat till 'auto' för responsivitet
     }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleAboutClick = () => {
+    navigate("/about");
   };
 
   const handleContactClick = () => {
@@ -63,30 +64,13 @@ export const Header: React.FC<HeaderProps> = ({
             Sourzy
           </Logo>
           <Nav>
-            <NavLink
-              to="/about"
-              className={({ isActive }) => (isActive ? "active" : "")}
-              style={{
-                background: "none",
-                border: "none",
-                color: "#ffffff",
-                fontSize: "1rem",
-                padding: `${theme.spacing.xs} ${theme.spacing.sm}`,
-                borderRadius: "0.5rem",
-                fontWeight: 500,
-                textShadow: shouldBeScrolled
-                  ? "none"
-                  : "0 2px 4px rgba(0, 0, 0, 0.3)",
-                position: "relative",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                gap: "0.25rem",
-                textDecoration: "none",
-              }}
+            <NavButton
+              onClick={handleAboutClick}
+              className={location.pathname === "/about" ? "active" : ""}
+              $isScrolled={shouldBeScrolled}
             >
               About us
-            </NavLink>
+            </NavButton>
             <NavButton
               onClick={handleContactClick}
               $isScrolled={shouldBeScrolled}
