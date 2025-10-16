@@ -1,8 +1,3 @@
-// Extend Window interface to include MSStream
-interface Window {
-  MSStream?: unknown;
-}
-
 import React, { useEffect, useRef, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import styled from "styled-components";
