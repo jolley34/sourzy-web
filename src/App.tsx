@@ -32,12 +32,10 @@ const ScrollToTop: React.FC<{ isSideMenuOpen: boolean }> = ({
   const prevPathnameRef = React.useRef(pathname);
 
   useEffect(() => {
-    // Scrolla bara om route faktiskt ändrades, inte bara för sidemenu stängning
     if (pathname === prevPathnameRef.current) return;
 
     prevPathnameRef.current = pathname;
 
-    // Använd setTimeout istället för requestAnimationFrame för bättre timing
     const timer = setTimeout(() => {
       window.scrollTo({ top: 0, behavior: "auto" });
     }, 0);
@@ -76,12 +74,10 @@ const AppContent: React.FC = () => {
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
-  // Stäng sidemenu när route ändras
   useEffect(() => {
     setIsSideMenuOpen(false);
   }, [location.pathname]);
 
-  // Hantera overflow när sidemenu öppnas/stängs
   useEffect(() => {
     if (isSideMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -144,6 +140,7 @@ const AppContent: React.FC = () => {
           opacity: isLoading ? 0 : 1,
           transition: "opacity 0.5s ease-in-out",
           pointerEvents: isLoading ? "none" : "auto",
+          visibility: isLoading ? "hidden" : "visible",
         }}
       >
         <Header

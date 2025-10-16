@@ -152,7 +152,7 @@ export const CloseButton = styled.button`
   @media (max-width: ${theme.breakpoints.mobile}) {
     min-width: 44px;
     min-height: 44px;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
 `;
 
