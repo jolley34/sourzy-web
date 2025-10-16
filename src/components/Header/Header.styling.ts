@@ -14,9 +14,12 @@ export const HeaderContainer = styled.header<HeaderContainerProps>`
     props.$isScrolled ? "rgba(0, 0, 0, 0.95)" : "transparent"};
   backdrop-filter: ${(props) => (props.$isScrolled ? "blur(10px)" : "none")};
   z-index: 1000;
-  padding: calc(${theme.spacing.sm} + env(safe-area-inset-top, 0)) 0
-    ${theme.spacing.sm};
+  padding: calc(${theme.spacing.sm}) ${theme.spacing.sm};
   transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    height: 48px;
+  }
 `;
 
 export const HeaderContent = styled.div`
@@ -81,7 +84,6 @@ export const NavButton = styled.button<NavButtonProps>`
   align-items: center;
   justify-content: center;
   -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
   height: 100%;
   position: relative;
   min-width: 80px;
@@ -155,7 +157,6 @@ export const CTAButton = styled.button<{ $variant?: "primary" | "secondary" }>`
   position: relative;
   overflow: hidden;
   -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
 
   &::before {
     content: "";

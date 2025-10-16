@@ -8,17 +8,12 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
   
- body {
+  body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
     line-height: 1.6;
     color: ${theme.colors.text};
     background-color: ${theme.colors.background};
     overflow-x: hidden;
-    margin-top: calc(60px + ${theme.spacing.sm} + env(safe-area-inset-top, 0)); /* Kompenserar för headerns höjd och padding */
-
-    @media (max-width: ${theme.breakpoints.mobile}) {
-      margin-top: calc(48px + ${theme.spacing.sm} + env(safe-area-inset-top, 0)); /* Anpassa för mobil */
-    }
   }
   
   img {
