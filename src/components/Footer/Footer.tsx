@@ -147,9 +147,9 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
           <FooterSection>
             <FooterTitle>Company</FooterTitle>
             <FooterLink href="/about">About us</FooterLink>
-            <FooterLink href="#" onClick={handleContactClick}>
+            {/*  <FooterLink href="#" onClick={handleContactClick}>
               Contact
-            </FooterLink>
+            </FooterLink> */}
           </FooterSection>
 
           <FooterSection>
